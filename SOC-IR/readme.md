@@ -17,7 +17,7 @@ response actions.
 - Detection analysis
 
 ## Projects
--[Cover6](./Cover6)
+- [Cover6](./Cover6)
 <!--
 - [LetsDefend](./LetsDefend/)
 - [KC7](./KC7/)
