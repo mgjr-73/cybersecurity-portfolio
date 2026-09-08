@@ -54,7 +54,7 @@ Checked both `www[.]windows-update.site` and SMTP IP in Talos Threat Intelligenc
 Based on threat intelligence, I found malicious/reported activity associated with the sender infrastructure. Since the Device Action status (ALLOWED) indicated that the email was delivered, the playbook's next recommended step was to delete the email.
 
 ## Determine Whether the User Interacted
-In Log Management, I filtered for the event date and found two logs showing the malicious SMTP IP address. One for the incoming email to (SMTP port 25) and one outgoing HTTPS request (port 443) confirming access to the malicious site. I also noted the timestamp... email received at 9:44AM and the outgoing internet connection at 11:26PM, almost 14 hours after the email was received. This tracked with the behavior described in the Malware-Traffic-Analysis.net finding, where the outbound internet connection starts several hours after initial infection.
+In Log Management, I filtered for the event date and found two logs showing the malicious SMTP IP address, one for the incoming email (SMTP port 25) and one showing subsequent HTTPS traffic (port 443) associated with access to the malicious site. I also noted the timestamp... email received at 9:44AM and the outgoing internet connection at 11:26PM, almost 14 hours after the email was received. This tracked with the behavior described in the Malware-Traffic-Analysis.net finding, where the outbound internet connection starts several hours after initial infection.
 
 After confirmation, the endpoint was contained per playbook guidelines. 
 
@@ -87,7 +87,7 @@ Actions Taken: The endpoint was contained, and the case was escalated to Tier 2 
 # Analyst Perspective
 The investigation demonstrated that no individual telemetry source provided the complete picture. Email telemetry established the initial phishing event, threat intelligence provided context about the infrastructure, browser history established user interaction, and endpoint telemetry revealed subsequent PowerShell activity.
 
-The approximately 14-hour gap between the phishing email and endpoint execution also demonstrated the importance of timeline analysis. While the delay was significant, the available evidence was insufficient to determine exactly why it occurred. However, the findings on Malware-Traffic-Analysis.net supports the Lumma Stealer behavior for this particular case.
+The approximately 14-hour gap between the phishing email and endpoint execution also demonstrated the importance of timeline analysis. While the delay was significant, the available evidence was insufficient to determine exactly why it occurred. However, the findings on Malware-Traffic-Analysis.net provided additional context that was consistent with the observed Lumma Stealer behavior.
 
 ## Important Questions
 - Is the email actually malicious?
@@ -95,7 +95,7 @@ The approximately 14-hour gap between the phishing email and endpoint execution 
 - Did the user click the link?
 - What happened after the user visited the site?
 - Why was there a ~14-hour gap before endpoint execution?
-- What does the PowerShell command actually do?
+- What does the PowerShell command actually do? (This is for Tier 2 scope but can be a good follow up post)
 - Does the evidence support the Lumma Stealer hypothesis?
 
 ## Skills Obtained
