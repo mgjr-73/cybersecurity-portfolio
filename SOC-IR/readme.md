@@ -17,9 +17,8 @@ response actions.
 - Detection analysis
 
 ## Projects
--TBD
+-[Cover6](./Cover6)
 <!--
-- [First Watch](./First-Watch/)
 - [LetsDefend](./LetsDefend/)
 - [KC7](./KC7/)
 -->
