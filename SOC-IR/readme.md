@@ -18,7 +18,8 @@ response actions.
 
 ## Projects
 - [Cover6](./Cover6)
-<!--
 - [LetsDefend](./LetsDefend/)
+<!--
+
 - [KC7](./KC7/)
 -->
