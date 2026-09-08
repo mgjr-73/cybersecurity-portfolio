@@ -11,7 +11,7 @@ This repository contains practical work across security operations, incident res
 ## 🔎 Security Operations & Incident Response
 
 Investigations involving security alerts, logs, network traffic, threat intelligence, and incident response processes.
-
+<!--
 **Focus areas:**
 
 - Alert triage
@@ -22,7 +22,7 @@ Investigations involving security alerts, logs, network traffic, threat intellig
 - Cyber Kill Chain / MITRE ATT&CK mapping
 - Incident documentation
 - Detection analysis
-
+-->
 [Explore SOC & Incident Response →](./SOC-IR/)
 
 ---
