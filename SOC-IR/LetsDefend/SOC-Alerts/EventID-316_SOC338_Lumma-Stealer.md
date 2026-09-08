@@ -5,17 +5,17 @@ Investigation of a LetsDefend SOC alert involving a suspected ClickFix phishing 
 Determine whether the alert is a True Positive or False Positive and take the appropriate action according to the playbook.
 
 # Event Details
-EventID : 316
-Event Time : Mar, 13, 2025, 09:44 AM
-Rule : SOC338 - Lumma Stealer - DLL Side-Loading via Click Fix Phishing
-Level : Security Analyst
-SMTP Address : 132.232.40.201
-Source Address : update@windows-update.site
-Destination Address : dylan@letsdefend.io
-E-mail Subject : Upgrade your system to Windows 11 Pro for FREE
-Device Action : Allowed
-Trigger Reason : Redirected site contains a click fix type script for Lumma Stealer distribution.
-Hint: Try to analyse website, if the domain is down, try to analyze it via any.run. Check the
+- EventID : 316
+- Event Time : Mar, 13, 2025, 09:44 AM
+- Rule : SOC338 - Lumma Stealer - DLL Side-Loading via Click Fix Phishing
+- Level : Security Analyst
+- SMTP Address : 132.232.40.201
+- Source Address : update@windows-update.site
+- Destination Address : dylan@letsdefend.io
+- E-mail Subject : Upgrade your system to Windows 11 Pro for FREE
+- Device Action : Allowed
+- Trigger Reason : Redirected site contains a click fix type script for Lumma Stealer distribution.
+- Hint: Try to analyse website, if the domain is down, try to analyze it via any.run. Check the
 processes for powershell execution. Check Log management for additional logs.
 
 # Investigation / Approach
