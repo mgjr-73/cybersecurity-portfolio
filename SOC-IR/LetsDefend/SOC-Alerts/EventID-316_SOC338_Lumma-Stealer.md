@@ -83,11 +83,9 @@ Date: Mar 13, 2025
 ## Analyst Note
 An alert was triggered on Mar, 13, 2025, 09:44 AM, for inbound email from sender update@windows-update.site with SMTP IP 132.232.40.201 to dylan@letsdefend.io at 172.16.17.216. The alert was generated because the email contained a link to `windows-update.site` which is associated with ClickFix phishing campaign. Analysis of HTTP and Endpoint Browser History logs  indicates the link was clicked thereby accessing the malicious site.
 
-Verdict
-True Positive
+Verdict: True Positive
 
-Actions Taken
-The endpoint was contained, and the case was escalated to Tier 2 for further investigation.
+Actions Taken: The endpoint was contained, and the case was escalated to Tier 2 for further investigation.
 
 
 # Analyst Perspective
