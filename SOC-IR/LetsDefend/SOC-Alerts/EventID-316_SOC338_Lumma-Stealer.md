@@ -45,7 +45,7 @@ SMTP IP address 132[.]232[.]40[.]201 was also suspicious but based on the score,
 Relations tab confirmed `windows-update.site`
 <img width="822" height="394" alt="image" src="https://github.com/user-attachments/assets/4568a286-cbcb-48b7-a2b1-2d77ca285dc3" />
 
-Checked the SMTP IP on AbuseIPDB and found similar story of its malicious nature.
+Checked the SMTP IP on AbuseIPDB but based on confidence score, it is not conclusive if the IP is malicious.
 <img width="670" height="521" alt="image" src="https://github.com/user-attachments/assets/1cb7fc19-8fb2-4cc4-8ddf-a63731b7d160" />
 
 Checked both `www[.]windows-update.site` and SMTP IP in Talos Threat Intelligence. SMTP IP address reputation was neutral but was not/no longer on the Block List. `www[.]windows-update.site`, however, was still on the Block List.
@@ -111,7 +111,6 @@ The approximately 14-hour gap between the phishing email and endpoint execution 
 - Evidence-based incident reporting
 
 ## Tools Used
-- LetsDefend
 - VirusTotal
 - AbuseIPDB
 - Cisco Talos
