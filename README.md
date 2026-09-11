@@ -28,7 +28,9 @@ Investigations involving security alerts, logs, network traffic, threat intellig
 ## 🚩 Capture The Flag (CTF)
 
 From time to time I might be able to join CTF events. This section contains walkthroughs and notes to guide the reader while attempting to not reveal the actual flags.
-[Explore CTFs](./CTFs/)
+
+[Explore CTFs →](./CTFs/)
+
 ---
 <!--
 ## 🛡️ Detection Engineering
