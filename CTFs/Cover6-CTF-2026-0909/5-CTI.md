@@ -6,7 +6,7 @@
     
     - this one took me in for a loop. The hash wasn't pulling up anything from open-source intel sites.
     - I decided to just use it as a search term on Google and found the issue... the hash was incomplete! The results were matching all but one missing last character
-    - I added that character and found the answer in the **Family labels** sections
+    - I added that character and found the answer in the **Family labels** section on VirusTotal.
   
 - ## Know Thy Enemy  
     An intrusion report on a separate Odapeeka State incident, written in plain language, no jargon:  
