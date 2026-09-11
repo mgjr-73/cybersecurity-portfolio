@@ -38,7 +38,7 @@
     
     - Notice in the previous `readme.txt`, the password was revealed.
     - We also got a clue about old cookie-based session logic.
-    - At the login portal, I tried admin:<password-from-readme.txt>
+    - At the login portal, I tried `admin:<password-from-readme.txt>`
     - Once in, there is a link to admin access but you are initially logged in as "clerk" so it is restricted
     - Inspecting the html, we see comment about session handling is on client side only. It is using client-side `role` cookie. As we can see, "clerk" is encoded in base64.  
         <img width="1146" height="132" alt="image" src="https://github.com/user-attachments/assets/d1fae2d8-41cf-4125-b494-c59a1a1461ec" />
