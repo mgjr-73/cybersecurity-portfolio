@@ -19,7 +19,7 @@ Determine whether the alert is a True Positive or False Positive and take the ap
 processes for powershell execution. Check Log management for additional logs.
 
 # Investigation / Approach
-I wasn't familiar with Lumma Stealer so I did an internet search to quickly familiarize myself. I found useful information at [Malware-Traffic-Analysis.net](https://www.malware-traffic-analysis.net/2026/01/01/index.html) regarding the the timeline between initial infection and subsequent activity consisting of HTTPS requests caused by commands for `mshta`.
+I wasn't familiar with Lumma Stealer so I did an internet search to quickly familiarize myself. I found useful information at [Malware-Traffic-Analysis.net](https://www.malware-traffic-analysis.net/2026/01/01/index.html) regarding the timeline between initial infection and subsequent activity consisting of HTTPS requests caused by commands for `mshta`.
 
 Following the playbook...
 
