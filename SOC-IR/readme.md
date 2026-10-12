@@ -19,7 +19,7 @@ response actions.
 ## Projects
 - [Cover6](./Cover6)
 - [LetsDefend](./LetsDefend/)
-- [MYDIFR](./MYDFIR)
+- [MYDFIR](./MYDFIR)
 <!--
 
 - [KC7](./KC7/)
