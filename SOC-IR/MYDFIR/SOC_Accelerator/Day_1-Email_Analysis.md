@@ -61,11 +61,9 @@ Using `exiftool` on `GoodJobMajor.pdf` revealed the author's name as **Pestero 
 
 For purposes of this challenge, the fictional scenario can reasonably be mapped to **Actions on Objectives**.
 
-The scenario explicitly establishes that CoCanDian citizens, including the Planetary President's daughter, have been abducted. In the challenge's analogy, these abductions represent the successful removal or acquisition of high-value targets—paralleling data exfiltration in a ransomware/extortion scenario. The crown image functions as a symbolic proof-of-possession artifact, while the ransom note communicates the demand.
+The scenario explicitly establishes that CoCanDian citizens, including the Planetary President's daughter, have been abducted. In the challenge's analogy, these abductions represent the successful removal or acquisition of high-value targets, paralleling data exfiltration in a ransomware/extortion scenario. The crown image functions as a symbolic proof-of-possession artifact, while the ransom note communicates the demand.
 
-This is a **scenario-level analogy**, not a claim that the email technically proves digital data was transferred from a computer system. The artifacts provided for the exercise are primarily email and attachment evidence, and no independent endpoint or network telemetry is available in this investigation to demonstrate digital data exfiltration.
-
-The ransom note and the declaration of war support the interpretation that the attacker is communicating demands and intentions. They do not, on their own, prove every preceding technical phase of a real cyberattack or establish that the attacker's stated location is genuine.
+The artifacts provided for the exercise are primarily email and attachment evidence, and no independent endpoint or network telemetry is available in this investigation to demonstrate digital data exfiltration.
 
 ## Recommendations for CoCanDa
 
@@ -76,7 +74,7 @@ The ransom note and the declaration of war support the interpretation that the a
 
 ## Recommendations for a Real-World Ransomware / Extortion Scenario
 
-The fictional story resembles a successful ransomware/extortion scenario, but in a real incident the presence of a ransom note would not, by itself, prove malware execution, data exfiltration, or the full scope of compromise. The following actions would be appropriate as follow-up recommendations, subject to the evidence available.
+The fictional story resembles a successful ransomware/extortion scenario, but in a real incident the presence of a ransom note would not, by itself, prove malware execution, data exfiltration, or the full scope of compromise without thorough investigation of prior events leading to delivery of the ransom note. The following actions would be appropriate as follow-up recommendations, subject to the evidence available.
 
 1.  **Preserve evidence.** Retain the original email and complete headers, encoded content, attachments, file hashes, relevant mail-security records, and any available endpoint or network logs. Avoid modifying the original evidence.
 2.  **Determine prior activity leading to the ransomware note.** Review available endpoint, email, and user-activity telemetry for evidence of file opening, process execution, malware activity, unauthorized access, encryption, persistence, or data transfer.
