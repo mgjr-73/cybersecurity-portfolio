@@ -1,5 +1,5 @@
 # 90-Day SOC Accelerator
-MYDFIR's SOC Accelerator is part of **The Forge** designed to build skills through hands-on labs, realistic investigations, case reports, CTFs, mentorship, and a community working toward the same goal. 
+MYDFIR's SOC Accelerator is part of **The Forge** designed to build skills through hands-on labs including building the SOC environment, realistic investigations, case reports, CTFs, mentorship, and a community working toward the same goal. 
 The environment enables the student analyst to get consistent reps in the tools analysts use, receive mentor and peer feedback, and turn the learning outcomes into proof for employers.
 
 ### Program Features
@@ -12,5 +12,7 @@ The environment enables the student analyst to get consistent reps in the tools 
 - Forge Senior leadership track
 - Sentinel/XDR • Splunk • Suricata • Zeek + more
 
-# Topology
+<br></br>
+# The Topology (So Far...)
+NOTE: Click image to enlarge.
 <img width="1600" height="950" alt="MYDFIR_SOC_Topo" src="https://github.com/user-attachments/assets/f8d6a593-54c8-4c78-827d-87ef75165c36" />
