@@ -13,7 +13,7 @@ The environment enables the student analyst to get consistent reps in the tools 
 - Sentinel/XDR • Splunk • Suricata • Zeek + more
 
 <br></br>
-# The Topology (So far...)
+# The Topology (so far...)
 NOTE: Click image to enlarge.
 <img width="1600" height="950" alt="MYDFIR_SOC_Topo" src="https://github.com/user-attachments/assets/2b28adcc-65e7-45ed-b3e6-ef596dfe5078" />
 
