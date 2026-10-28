@@ -15,5 +15,6 @@ The environment enables the student analyst to get consistent reps in the tools 
 <br></br>
 # The Topology (so far...)
 NOTE: Click image to enlarge.
-<img width="1600" height="950" alt="MYDFIR_SOC_Topo" src="https://github.com/user-attachments/assets/2b28adcc-65e7-45ed-b3e6-ef596dfe5078" />
+<img width="1600" height="950" alt="MYDFIR_SOC_Topo" src="https://github.com/user-attachments/assets/d1009fbc-cc32-41ce-9f8c-bae2220d4e2c" />
+
 
