@@ -1,5 +1,5 @@
 # First Watch Findings and Module Answers
-⚠️ The section below contains investigation notes, evidence details, and my answers to the module questions. Expand it only if you're comfortable with spoilers or want to compare your findings.
+#### ⚠️ WARNING: The section below contains investigation notes, evidence details, and my answers to the module questions. Expand it only if you're comfortable with spoilers or want to compare your findings.
 
 ## Day 1: Reconnaissance (Completed 10/29/26)
 <details>
