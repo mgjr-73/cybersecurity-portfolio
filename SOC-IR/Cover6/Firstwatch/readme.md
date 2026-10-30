@@ -28,9 +28,9 @@ Status: **In Progress**. Follow along in the [Cover6 First Watch: Field Notes](#
 
 ## Shortcut To Field Notes
 - [Day 1](https://secplusreview.wordpress.com/2026/10/31/cover6-first-watch-field-notes-day-1-reconnaissance/)
-- [Day 2](#)
-- [Day 3](#)
-- [Day 4](#)
-- [Day 5](#)
-- [Day 6](#)
-- [Day 7](#)
+- Day 2
+- Day 3
+- Day 4
+- Day 5
+- Day 6
+- Day 7
