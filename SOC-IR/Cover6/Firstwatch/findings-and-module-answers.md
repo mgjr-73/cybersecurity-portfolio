@@ -16,6 +16,7 @@
   Query output showed indication of automated web probes from two IPs:
   - 185.220.101.44 - 44 requests on 20 August, 06:00–06:10.
   - 67.205.138.164 - 42 requests on 21 August, 09:00–09:13.
+  
   inconclusive as to which one is the attacker, although both conducted automated probes.
   
 </details>
