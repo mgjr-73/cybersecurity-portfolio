@@ -25,3 +25,12 @@ The project is organized into seven daily activities, each focused on a phase of
 Each day includes investigation notes, key findings, and lessons learned. A companion blog series, titled [**Cover6 First Watch: Field Notes**](#), documents my experience and investigative thought process as I progress through the exercise.
 
 Status: **In Progress**. Follow along in the [Cover6 First Watch: Field Notes](#).
+
+## Shortcut To Field Notes
+- [Day 1](#)
+- [Day 2](#)
+- [Day 3](#)
+- [Day 4](#)
+- [Day 5](#)
+- [Day 6](#)
+- [Day 7](#)
