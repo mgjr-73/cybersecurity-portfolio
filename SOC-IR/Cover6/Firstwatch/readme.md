@@ -22,6 +22,6 @@ The objective is to strengthen my investigative skills, practice evidence-based 
 
 The project is organized into seven daily activities, each focused on a phase of the Cyber Kill Chain.
 
-Each day includes investigation notes, key findings, and lessons learned. A companion blog series, titled **Cover6 First Watch: Field Notes**, documents my experience and investigative thought process as I progress through the exercise.
+Each day includes investigation notes, key findings, and lessons learned. A companion blog series, titled [**Cover6 First Watch: Field Notes**](#), documents my experience and investigative thought process as I progress through the exercise.
 
-Status: **In Progress**. Follow along in the Cover6 First Watch: Field Notes.
+Status: **In Progress**. Follow along in the [Cover6 First Watch: Field Notes](#).
