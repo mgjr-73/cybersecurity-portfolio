@@ -10,5 +10,5 @@ Happy building!!!
 
 
 # Labs
-- [Raspberry Pi Cyber Lab](./Lab_Environments/)
+- [Raspberry Pi Cyber Lab](./Raspberry_Pi/)
    Built to learn OWASP web application security by running a docker instance of Webgoat/Webwolf. I presented this lab to the Cover6 Community Meetup - First Time Speaker session on 10/28/26. Check out the PDF file for the slide deck.
