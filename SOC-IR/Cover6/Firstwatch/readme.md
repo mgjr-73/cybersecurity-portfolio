@@ -24,7 +24,9 @@ The project is organized into seven daily activities, each focused on a phase of
 
 Each day includes investigation notes, key findings, and lessons learned. A companion blog series, titled [**Cover6 First Watch: Field Notes**](https://secplusreview.wordpress.com/tag/first-watch/), documents my experience and investigative thought process as I progress through the exercise.
 
-Status: **In Progress**. Follow along in the [Cover6 First Watch: Field Notes](https://secplusreview.wordpress.com/tag/first-watch/).
+Status: **In Progress**.
+
+You can view my daily findings and answers to module questions [HERE](./findings-and-module-answers.md).
 
 ## Shortcut To Field Notes
 - [Day 1](https://secplusreview.wordpress.com/2026/10/31/cover6-first-watch-field-notes-day-1-reconnaissance/)
