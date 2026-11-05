@@ -9,7 +9,7 @@ Learning activities include:
 - Building SOC dashboards.
 - Setup File Integrity Monitoring (FIM) and create a custom detection rule.
 - Configure Active Response.
-- Investigate alerts and create an analyst report.
+- Investigate alerts and create [analyst reports](./analyst_reports.md).
 
 # Topology
 Coming soon!
