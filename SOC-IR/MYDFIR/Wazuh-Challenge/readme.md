@@ -7,9 +7,9 @@ The MYDFIR Wazuh Challenge is a 7-day guided build of a SOC lab consisting of th
 Learning activities include:
 - Simulating hacker activity to generate telemetry and search for events on Wazuh.
 - Building SOC dashboards.
-- Setup File Integrity Monitoring (FIM) and create a custom detection rule.
-- Configure Active Response.
-- Investigate alerts and create [analyst reports](./analyst_reports.md).
+- Setting up File Integrity Monitoring (FIM) and creating a custom detection rule.
+- Configuring Active Response.
+- Investigating alerts and creating [analyst reports](./analyst_reports.md).
 
 # Topology
 Coming soon!
