@@ -31,7 +31,10 @@ Given the limited fields available in the Linux events, I kept the output simple
 - `host` — The host reporting the event.
 - `message` — The original log message.
 
-<img width="1506" height="372" alt="image" src="https://github.com/user-attachments/assets/6ca65000-5191-4dfd-9998-96809b625a3e" />
+<kbd>
+  <img width="1506" height="372" alt="image" src="https://github.com/user-attachments/assets/6ca65000-5191-4dfd-9998-96809b625a3e" />
+</kbd>  
+
 
 I'm sure this query can be refined further once I learn to use `rex`, as the raw message contains additional information that could help confirm whether an account was successfully created.
 
@@ -53,7 +56,14 @@ I selected fields that would provide useful context for an analyst investigating
 | `New_Account_Domain` | Domain or computer context of the new account |
 | `Logon_ID` | Logon session identifier of the account creator |
 
+<kbd>
+  <img width="1654" height="342" alt="image" src="https://github.com/user-attachments/assets/83fc8afb-dac3-425f-821a-8dca7afeebab" />
+</kbd>  
+
+
 I also expanded the Windows alert description to provide investigation guidance.
+
+> Description: Detects a newly created Windows account was created. Use the Logon_ID to correlate other Windows Security events generated during the same logon session. Related Event IDs to investigate include: 4722 (user account enabled), 4728 (user added to a security-enabled global group), 4732 (user added to a security-enabled local group). Also review subsequent activity associated with the newly created account for signs of suspicious behavior or potential compromise.
 
 The `Logon_ID` can be used to correlate other Windows Security events generated during the creator's logon session. I also included related Event IDs worth investigating:
 
