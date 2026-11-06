@@ -1,5 +1,5 @@
 # Overview
-The MYDFIR Wazuh Challenge is a free 7-day guided build of a SOC lab consisting of three VMs:
+The [MYDFIR](https://www.skool.com/mydfir/about?ref=cd5ee62b10bc47bea1b4d0c17ba7be5f) Wazuh Challenge is a free 7-day guided build of a SOC lab consisting of three VMs:
 - An Ubuntu server to configure and run Wazuh
 - A Windows VM to install sysmon and Wazuh agent
 - An Ubuntu VM to install sysmon and Wazuh agent
