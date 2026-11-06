@@ -1,4 +1,4 @@
-# Day 29 — Splunk Alert Creation: New User Account Detection
+# Day 29 - Splunk Alert Creation: New User Account Detection
 
 ## Overview
 
