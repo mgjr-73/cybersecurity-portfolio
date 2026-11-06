@@ -8,7 +8,7 @@ Rather than immediately following the walkthrough, I attempted to develop the de
 
 ## Detection Research
 
-I identified [**T1136 — Create Account**](https://attack.mitre.org/techniques/T1136/) in MITRE ATT&CK. Reviewing its Detection Strategy provided useful guidance on the telemetry and activity to look for across Windows and Linux systems.
+I identified [**T1136 - Create Account**](https://attack.mitre.org/techniques/T1136/) in MITRE ATT&CK. Reviewing its Detection Strategy provided useful guidance on the telemetry and activity to look for across Windows and Linux systems.
 
 I used that information to develop two separate detections.
 
@@ -27,9 +27,9 @@ index="mydfir-lab1" source="auth.log" sourcetype=linux_auth_logs (useradd OR add
 
 Given the limited fields available in the Linux events, I kept the output simple:
 
-- `_time` — When the event was recorded.
-- `host` — The host reporting the event.
-- `message` — The original log message.
+- `_time` - When the event was recorded.
+- `host` - The host reporting the event.
+- `message` - The original log message.
 
 <kbd>
   <img width="1506" height="372" alt="image" src="https://github.com/user-attachments/assets/6ca65000-5191-4dfd-9998-96809b625a3e" />
@@ -67,9 +67,9 @@ I also expanded the Windows alert description to provide investigation guidance.
 
 The `Logon_ID` can be used to correlate other Windows Security events generated during the creator's logon session. I also included related Event IDs worth investigating:
 
-- **4722** — User account enabled.
-- **4728** — User added to a security-enabled global group.
-- **4732** — User added to a security-enabled local group.
+- **4722** - User account enabled.
+- **4728** - User added to a security-enabled global group.
+- **4732** - User added to a security-enabled local group.
 
 Additionally, I recommended reviewing subsequent activity associated with the newly created account for signs of suspicious behavior or potential compromise.
 
