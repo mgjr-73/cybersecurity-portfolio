@@ -1,5 +1,5 @@
 # 90-Day SOC Accelerator
-[MYDFIR](https://www.skool.com/mydfir/about?ref=cd5ee62b10bc47bea1b4d0c17ba7be5f_'s SOC Accelerator is part of **The Forge** designed to build skills through hands-on labs including building the SOC environment, realistic investigations, case reports, CTFs, mentorship, and a community working toward the same goal. 
+[MYDFIR](https://www.skool.com/mydfir/about?ref=cd5ee62b10bc47bea1b4d0c17ba7be5f)'s SOC Accelerator is part of **The Forge** designed to build skills through hands-on labs including building the SOC environment, realistic investigations, case reports, CTFs, mentorship, and a community working toward the same goal. 
 The environment enables the student analyst to get consistent reps in the tools analysts use, receive mentor and peer feedback, and turn the learning outcomes into proof for employers.
 
 I will share only selected days that I think has been impactful in my learning journey.
