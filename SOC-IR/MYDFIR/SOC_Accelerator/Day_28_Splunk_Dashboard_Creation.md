@@ -1,10 +1,8 @@
 # Day 28 - Splunk Dashboard Creation — Windows Activity Dashboard Enhancement
 
-**SOC Accelerator | Day 28 | Splunk | Windows Security Logs**
-
 ## Overview
 
-As part of the SOC Accelerator training, I was given a scenario in which my SOC manager requested an additional panel on an existing Splunk dashboard called **Windows Activity**.
+I was given a scenario in which my SOC manager requested an additional panel on an existing Splunk dashboard called **Windows Activity**.
 
 The objective was to monitor changes to the Windows Firewall Exception List, specifically newly added rules.
 
@@ -21,6 +19,11 @@ Rather than immediately looking for the solution, I approached the task by exami
 
 I started with a broad keyword search for `exception` in the `mydfir-lab1` index. This returned 106 events.
 
+<kbd>
+  <img width="1275" height="517" alt="image" src="https://github.com/user-attachments/assets/3b6abbfc-94c7-45be-97f4-674a1ed9ad5d" />
+</kbd>
+
+
 I then examined the available fields and narrowed down the relevant data source:
 
 - **Host:** `winvm`
@@ -33,6 +36,11 @@ While examining the events, I found two Event IDs associated with Windows Firewa
 - **4948** — A Windows Firewall exception rule was deleted.
 
 Since the task specifically requested newly added rules, I filtered for Event ID 4946, which returned 53 events.
+
+<kbd>
+  <img width="898" height="337" alt="image" src="https://github.com/user-attachments/assets/7b2a3acd-8f2d-4934-8106-28073e9ed551" />
+</kbd>
+
 
 I then expanded individual events to identify the exact field names needed for the dashboard panel.
 
@@ -55,6 +63,10 @@ The selected fields provide an analyst with the basic context needed to review f
 
 I added the query as a new panel to the existing **Windows Activity** dashboard and named it **Firewall Exception Added**, following the SOC manager's instructions.
 
+<kbd>
+  <img width="1894" height="960" alt="image" src="https://github.com/user-attachments/assets/5d637baf-7d16-4d9e-93c5-d57956246974" />
+</kbd>
+
 The dashboard brings together multiple types of Windows security activity, including newly created user accounts and firewall exception changes.
 
 One observation from reviewing the dashboard was that the host `Desktop-IT.elnath.com` appeared as a common denominator across some of the displayed activity.
@@ -72,7 +84,7 @@ Both Event IDs report the addition of a Windows Firewall rule, but they originat
 | 2004 | Windows Firewall Operational log | A firewall rule was added. |
 | 4946 | Windows Security log | A change was made to the Windows Firewall exception list by adding a rule. |
 
-An important distinction is that Event ID 4946 requires the appropriate Windows audit policy to be enabled. According to the reference material, it also does not generate when a rule is added through Group Policy.
+An important distinction is that Event ID 4946 requires the appropriate Windows audit policy to be enabled. According to the [reference material](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4946), it also does not generate when a rule is added through Group Policy.
 
 Understanding these differences is useful when considering Windows Firewall monitoring and potential gaps in event visibility.
 
