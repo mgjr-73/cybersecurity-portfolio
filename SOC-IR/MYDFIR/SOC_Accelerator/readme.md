@@ -12,6 +12,8 @@ The environment enables the student analyst to get consistent reps in the tools 
 - Forge Senior leadership track
 - Sentinel/XDR • Splunk • Suricata • Zeek + more
 
+I will share only selected days that I think has been impactful in my learning journey.
+
 <br></br>
 # The Topology (so far...)
 NOTE: Click image to enlarge.
