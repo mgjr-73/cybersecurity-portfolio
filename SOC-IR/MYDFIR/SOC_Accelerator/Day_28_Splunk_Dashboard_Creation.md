@@ -1,4 +1,4 @@
-# Splunk — Windows Activity Dashboard Enhancement
+# Day 28 - Splunk Dashboard Creation — Windows Activity Dashboard Enhancement
 
 **SOC Accelerator | Day 28 | Splunk | Windows Security Logs**
 
