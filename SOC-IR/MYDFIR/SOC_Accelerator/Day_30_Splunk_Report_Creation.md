@@ -112,7 +112,9 @@ index="mydfir-lab1" source="auth.log" msg="Accepted password"
 
 This produced six results.
 
-<--insert image2-->
+<kbd>
+  <img src="./Images/d30-img2.png" />
+</kbd>
 
 One observation that stood out was a successful root login from a different source IP. Assuming the other IP was the legitimate address expected to access the host, this was worth investigating further.
 
@@ -126,7 +128,9 @@ One example involved the account `kporter`, which appeared in two separate sessi
 
 The sessions had different Logon IDs and different logon types:
 
-<--insert image3-->
+<kbd>
+  <img src="./Images/d30-img3.png" />
+</kbd>
 
 - Logon Type 11: Cached interactive logon.
 - Logon Type 7: Workstation unlock.
