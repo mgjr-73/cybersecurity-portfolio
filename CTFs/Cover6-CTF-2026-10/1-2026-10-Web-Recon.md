@@ -17,8 +17,5 @@ Take a closer look. The flag is on the page.
   Go to developer tool, inspect the source HTML. Search for the flag in one of the <div> blocks.
   
   <img width="786" height="228" alt="image" src="https://github.com/user-attachments/assets/3433fb59-e038-4c82-b8c7-1ff48de92a79" />
-
-
-
   
 </details>
