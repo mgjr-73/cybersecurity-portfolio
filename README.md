@@ -140,13 +140,13 @@ Splunk · ELK · KQL · Wireshark · Security Onion
 Python · Bash
 ---
 -->
-## Tool and Framework Exposure
-| SIEM | IR | Forensics  | Frameworks | Platforms |
+## Tools and Frameworks Exposure
+| SIEM | IR | Forensics  | Frameworks | Languages/Scripting | Platforms |
 |---|---|---|---|---|
-| Splunk | VirustTotal  | CyberChef | MITRE ATT&CK | Windows |
-| Wazuh | AbuseIPdb | WireShark | Cyber Kill Chain | Linux |
-||Talos Threat Intel |  | NIST Incident Response | VMWare |
-|||| SANS Incident Response | VirtualBox |
+| Splunk | VirustTotal  | CyberChef | MITRE ATT&CK | Python | Windows |
+| Wazuh | AbuseIPdb | WireShark | Cyber Kill Chain | Bash | Linux |
+||Talos Threat Intel |  | NIST Incident Response | KQL | VMWare |
+|||| SANS Incident Response | SPL | VirtualBox |
 ||||| Docker |
 ||||| Raspberry Pi |
 
