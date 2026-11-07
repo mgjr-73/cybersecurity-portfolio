@@ -30,7 +30,7 @@ You can view my daily findings and answers to module questions [HERE](./findings
 
 ## Shortcut To Field Notes
 - [Day 1](https://secplusreview.wordpress.com/2026/10/31/cover6-first-watch-field-notes-day-1-reconnaissance/)
-- Day 2
+- [Day 2](https://secplusreview.wordpress.com/2026/11/08/cover6-first-watch-field-notes-day-2-web-enumeration/)
 - Day 3
 - Day 4
 - Day 5
