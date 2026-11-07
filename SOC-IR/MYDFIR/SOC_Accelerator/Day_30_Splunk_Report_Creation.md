@@ -1,6 +1,4 @@
-# Splunk: Reporting Successful Administrative Logins
-
-**MYDFIR SOC Accelerator | Day 30 | Splunk | Windows Security Logs**
+# Day 30 - Splunk Report Creation: Windows Administrative Logins
 
 ## Overview
 
@@ -31,12 +29,12 @@ My goal was to correlate the two event types so that the report would show which
 
 I started by searching for both event types and examining their available fields.
 
-One challenge was that the Logon ID field had different names depending on the event:
+I needed to use different field sources for the Logon ID depending on the event:
 
-- Event 4624 used `Logon_ID`.
-- Event 4672 used `Subject_Logon_ID`.
+- Event 4624, use `Logon_ID`.
+- Event 4672, use `Subject_Logon_ID`.
 
-I used Splunk's `eval` command to normalize these fields into a common `logon_id` field.
+I used Splunk's `eval` command to normalize these fields into a common `logon_id` field. The logic simply uses the Logon_ID value if the EventCode value is 4624. otherwise use Subject_Logon_ID value.
 
 ```spl
 | eval logon_id=if(EventCode=4624, Logon_ID, Subject_Logon_ID)
@@ -88,11 +86,13 @@ I saved the search using the requested report title:
 
 The report description was:
 
-"Daily report that reviews the successful administrative logins that occurred the day before."
+"Daily report that reviews the successful administrative logins that occurred the day before. The report identifies successful Windows logon sessions (4624) associated with special privilege assignments (4672), correlates the two event types using Logon ID, and presents the results for an analyst to review."
 
 I configured the report to run every day at 2 AM, using the previous day's data.
 
 The resulting report provides a recurring view of successful Windows logon sessions associated with special privilege assignments.
+
+<--insert image1-->
 
 ### Additional Exploration: Linux Successful Logins
 
@@ -110,6 +110,8 @@ index="mydfir-lab1" source="auth.log" msg="Accepted password"
 
 This produced six results.
 
+<--insert image2-->
+
 One observation that stood out was a successful root login from a different source IP. Assuming the other IP was the legitimate address expected to access the host, this was worth investigating further.
 
 I created a separate Linux report as a personal exercise. I did not include it in my assigned submission because it was outside the scope of the Windows reporting task.
@@ -121,6 +123,8 @@ The Windows report successfully correlated Event IDs 4624 and 4672 using Logon I
 One example involved the account `kporter`, which appeared in two separate sessions on the same host at the same timestamp.
 
 The sessions had different Logon IDs and different logon types:
+
+<--insert image3-->
 
 - Logon Type 11: Cached interactive logon.
 - Logon Type 7: Workstation unlock.
@@ -144,5 +148,13 @@ This exercise reinforced several important Splunk and Windows security concepts:
 - **Cross-platform investigation:** Exploring Linux authentication logs helped me recognize that similar security objectives can require different search approaches depending on the available telemetry.
 
 One of my biggest takeaways was the importance of understanding the underlying event structure before attempting to correlate data. Knowing which fields represent the account, session, and privilege assignment made the difference between simply displaying events and producing a report with meaningful investigative context.
+
+## References
+- https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/basic-audit-logon-events
+- https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventID=4672
+- https://lantern.splunk.com/Security_Use_Cases/Security_Monitoring/Managing_*nix_system_user_account_behavior/Successful_logins_to_a_*nix_server
+- https://lantern.splunk.com/Security_Use_Cases/Security_Monitoring/Managing_*nix_system_user_account_behavior/Use_of_sudo_commands_on_a_server
+- https://lantern.splunk.com/Security_Use_Cases/Security_Monitoring/Managing_*nix_system_user_account_behavior
+- chatGPT for SPL query assistance
 
 **Next step:** Continue developing my SPL skills and explore how these reports could be expanded into detections that alert analysts to unusual or potentially unauthorized privileged access.
