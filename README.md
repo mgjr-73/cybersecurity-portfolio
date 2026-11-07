@@ -192,12 +192,14 @@ Linux · Windows · VMware · AWS
 ---
 -->
 ## Tool and Framework Exposure
-| SIEM | OSINT | Forensics  | Frameworks
-|---|---|---|---|
-| Splunk | VirustTotal  | CyberChef | MITRE ATT&CK |
-| Wazuh | AbuseIPdb | WireShark | Cyber Kill Chain |
-||Talos Threat Intel | ||
-
+| SIEM | OSINT | Forensics  | Frameworks | OS/Environments |
+|---|---|---|---|---|
+| Splunk | VirustTotal  | CyberChef | MITRE ATT&CK | Windows |
+| Wazuh | AbuseIPdb | WireShark | Cyber Kill Chain | Linux |
+||Talos Threat Intel | || VMWare |
+||||| VirtualBox |
+||||| Docker |
+||||| Raspberry Pi |
 
 ## About Me
 
