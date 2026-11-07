@@ -1,1 +1,2 @@
-<img src="Lab_Environments/Raspberry_Pi/images/Slide1.PNG" />
+<img width="1280" height="720" alt="Slide1" src="./images/Slide1.PNG" />
+
