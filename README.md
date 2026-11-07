@@ -196,8 +196,8 @@ Linux · Windows · VMware · AWS
 |---|---|---|---|---|
 | Splunk | VirustTotal  | CyberChef | MITRE ATT&CK | Windows |
 | Wazuh | AbuseIPdb | WireShark | Cyber Kill Chain | Linux |
-||Talos Threat Intel | || VMWare |
-||||| VirtualBox |
+||Talos Threat Intel |  | NIST Incident Response | VMWare |
+|||| SANS Incident Response | VirtualBox |
 ||||| Docker |
 ||||| Raspberry Pi |
 
