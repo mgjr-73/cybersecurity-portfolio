@@ -92,7 +92,9 @@ I configured the report to run every day at 2 AM, using the previous day's data.
 
 The resulting report provides a recurring view of successful Windows logon sessions associated with special privilege assignments.
 
-<--insert image1-->
+<kbd>
+  <img src="./Images/d30-img1.png" />
+</kbd>
 
 ### Additional Exploration: Linux Successful Logins
 
