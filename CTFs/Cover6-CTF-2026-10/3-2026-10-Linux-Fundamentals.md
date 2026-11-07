@@ -90,8 +90,47 @@ ii  zlib1g               1:1.2.11.dfsg-2ubuntu9.2                  amd64        
 <details>
   <summary><strong>Solution</strong></summary>
   
-  Coming Soon!
+  - Step 1. After inspecting the contents of the file `october-patch-bulletin.txt`, use `awk` to display a clean list of just the packages and fixed versions. 
   
+    `awk 'NR>=6 && NR<=12 {print $1, $2}' october-patch-bulletin.txt`
+
+    This means read `october-patch-bulletin.txt`, look at lines 6 through 12, and print the first two fields from each of those lines.
+
+    You should get something like this:
+    ```
+    libssl3 3.0.2-0ubuntu1.18
+    curl 7.81.0-1ubuntu1.18
+    libxml2 2.9.13+dfsg-1ubuntu0.4
+    libexpat1 2.4.7-1ubuntu0.5
+    sudo 1.9.9-1ubuntu2.4
+    openssh-server 1:8.9p1-3ubuntu0.10
+    ```
+  - Step 2. Use this command loop or save it into a .sh file and execute it.
+    ```bash
+    while read -r pkg fixed; do
+      installed=$(awk -v p="$pkg" '$1=="ii" && $2==p {print $3}' records-web01-packages.txt)
+
+      if dpkg --compare-versions "$installed" ge "$fixed"; then
+          echo "$pkg: OK ($installed >= $fixed)"
+      else
+          echo "$pkg: PATCH NEEDED ($installed < $fixed)"
+      fi
+    done < <(awk 'NR>=7 && NR<=12 {print $1, $2}' october-patch-bulletin.txt)
+    ```
+    You can use AI to break it down for you if you want to understand the script line-by-line.
+
+    But this is basically what the script does:
+    - `while`/`read` - loops through input
+    - `awk` - extracts fields
+    - `-v` - passes variables into awk
+    - `$()` - captures command output
+    - variables - stores values
+    - `if`/`else` - makes decisions
+    - `dpkg` - performs Debian-aware version comparison
+    - process substitution - feeds command output into another command
+   
+    The answer will be the one that has the PATCH NEEDED line. Just substitute package name to the flag format: `C6S{<package_name>_was_never_patched}`
+
 </details>
 
 &nbsp;
