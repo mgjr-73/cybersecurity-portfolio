@@ -4,7 +4,7 @@ Hands-on cybersecurity investigations, security labs, and technical projects doc
 
 My focus is on developing and strengthening the security mindset to be able to ask the pertinent questions and seek answers methodically: **what happened, how the evidence supports that conclusion, and what I would investigate next.**
 
-This repository contains practical work across security operations, incident response, detection, networking, cloud security, Linux, and malware analysis.
+This repository contains practical work across security operations, incident response, detection, networking, AI security, cloud security, Linux, and malware analysis.
 
 ---
 
