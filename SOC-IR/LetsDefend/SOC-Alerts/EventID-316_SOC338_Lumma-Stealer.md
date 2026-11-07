@@ -4,7 +4,7 @@ Investigation of a LetsDefend SOC alert involving a suspected ClickFix phishing 
 # Objective
 Determine whether the alert is a True Positive or False Positive and take the appropriate action according to the playbook.
 
-# Event Details
+# Alert Details
 - EventID : 316
 - Event Time : Mar, 13, 2025, 09:44 AM
 - Rule : SOC338 - Lumma Stealer - DLL Side-Loading via Click Fix Phishing
@@ -27,7 +27,7 @@ Following the playbook...
 Under Email Security, searched for recipient `dylan@letsdefend.io`.
 <img width="1605" height="187" alt="image" src="https://github.com/user-attachments/assets/4896a780-96fc-46af-9a8c-3aca5b7a3da1" />
 
-Items confirmed against initial information from Event Details:
+Items confirmed against initial information from Alert Details:
 - Timestamp, `Mar, 13, 2025, 09:44 AM`
 - Sender: `update@windows-update.site`
 - Subject: `Upgrade your system to Windows 11 Pro for FREE`
