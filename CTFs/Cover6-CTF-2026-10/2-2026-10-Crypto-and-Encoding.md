@@ -22,4 +22,11 @@ Facilities found this note taped under a keyboard in the Records office. Nobody 
 
 Decode it. The flag is inside.
 
+<details>
+  <summary><strong>Solution</strong></summary>
+  
+  Go to CyberChef and use **From Binary** to decode.
+  
+  <img width="1372" height="458" alt="image" src="https://github.com/user-attachments/assets/d1321ef9-8269-483f-adeb-3b211e494589" />
 
+</details>
