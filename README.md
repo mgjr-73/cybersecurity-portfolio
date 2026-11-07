@@ -141,7 +141,7 @@ Python · Bash
 ---
 -->
 ## Tool and Framework Exposure
-| SIEM | OSINT/IR | Forensics  | Frameworks | Platforms |
+| SIEM | IR | Forensics  | Frameworks | Platforms |
 |---|---|---|---|---|
 | Splunk | VirustTotal  | CyberChef | MITRE ATT&CK | Windows |
 | Wazuh | AbuseIPdb | WireShark | Cyber Kill Chain | Linux |
