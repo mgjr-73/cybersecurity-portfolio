@@ -191,6 +191,13 @@ Linux · Windows · VMware · AWS
 
 ---
 -->
+## Tool Exposure
+| SIEM | OSINT | Forensics  |
+|---|---|---|
+| Splunk | VirustTotal  | CyberChef |
+| Wazuh | AbuseIPdb | WireShark |
+||Talos Threat Intel | |
+
 ## About Me
 
 I'm building toward a career in **Security Operations and Incident Response**, with an emphasis on investigation, evidence analysis, and understanding adversary behavior.
