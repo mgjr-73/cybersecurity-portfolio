@@ -54,7 +54,7 @@ Checked both `www[.]windows-update.site` and SMTP IP in Talos Threat Intelligenc
 Based on threat intelligence, I found malicious/reported activity associated with the sender infrastructure. Since the Device Action status (ALLOWED) indicated that the email was delivered, the playbook's next recommended step was to delete the email.
 
 ## Determine Whether the User Interacted
-In Log Management, I filtered for the event date and found two logs showing the malicious SMTP IP address, one for the incoming email (SMTP port 25) and one showing subsequent HTTPS traffic (port 443) associated with access to the malicious site. I also noted the timestamp... email received at 9:44AM and the outgoing internet connection at 11:26PM, almost 14 hours after the email was received. This tracked with the behavior described in the Malware-Traffic-Analysis.net finding, where the outbound internet connection starts several hours after initial infection.
+In Endpoint Log Management, I filtered for the event date and found two logs showing the malicious SMTP IP address, one for the incoming email (SMTP port 25) and one showing subsequent HTTPS traffic (port 443) associated with access to the malicious site. I also noted the timestamp... email received at 9:44AM and the outgoing internet connection at 11:26PM, almost 14 hours after the email was received. This tracked with the behavior described in the Malware-Traffic-Analysis.net finding, where the outbound internet connection starts several hours after initial infection.
 
 After confirmation, the endpoint was contained per playbook guidelines. 
 
