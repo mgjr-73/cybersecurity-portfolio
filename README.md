@@ -131,68 +131,17 @@ Projects exploring security assessment, risk, controls, incident preparedness, a
 
 ---
 
-# How I Document My Work
-
-Each lab is documented using a consistent structure.
-
-### Objective
-What was I trying to determine or accomplish?
-
-### Investigation / Approach
-What did I do, and why?
-
-### Findings
-What did the evidence show?
-
-### Analysis
-What conclusions can reasonably be drawn from the evidence?
-
-### Analyst Perspective
-What questions did I ask, what assumptions did I challenge, and what would I investigate next?
-
-### Skills Obtained
-The cybersecurity skills practiced or developed during the exercise.
-
-### Tools Used
-The tools and technologies used during the exercise.
-
-### Key Takeaways
-What did I learn?
-
-### Evidence
-Supporting screenshots, logs, queries, code, packet captures, or other artifacts.
-
----
-
-# Selected Projects
-
-| Project | Area | Skills Demonstrated |
-|---|---|---|
-| Coming soon | SOC / IR | — |
-| Coming soon | Detection Engineering | — |
-| Coming soon | Network Security | — |
-| Coming soon | Cloud Security | — |
-
----
-
 # Tools & Technologies
 
 ### Security Operations
 Splunk · ELK · KQL · Wireshark · Security Onion
 
-### Frameworks
-MITRE ATT&CK · Cyber Kill Chain
-
 ### Programming & Automation
 Python · Bash
-
-### Platforms
-Linux · Windows · VMware · AWS
-
 ---
 -->
 ## Tool and Framework Exposure
-| SIEM | OSINT | Forensics  | Frameworks | OS/Environments |
+| SIEM | OSINT | Forensics  | Frameworks | Platforms |
 |---|---|---|---|---|
 | Splunk | VirustTotal  | CyberChef | MITRE ATT&CK | Windows |
 | Wazuh | AbuseIPdb | WireShark | Cyber Kill Chain | Linux |
