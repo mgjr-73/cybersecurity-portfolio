@@ -16,4 +16,4 @@ Happy building!!!
 # Labs
 - [Raspberry Pi 4 Cyber Lab](./Raspberry_Pi/)
 
-  A headless physical device that runs 24/7 and only accessible via ssh. Initially built to learn OWASP web application security by running a docker instance of Webgoat/Webwolf. Yes, you can totally use a VM but where's the fun in that? Plus, you have to give up some of the RAM on your host machine. I presented this lab to the Cover6 Community Meetup - First Time Speaker session on 10/28/26. Check out the [slide deck HERE](./Raspberry_Pi/Raspberry_Pi_Cyber_Lab_15_Minute_Talk.md).
+  A headless physical device that runs 24/7 and only accessible via ssh. Initially built to learn OWASP web application security by running a docker instance of Webgoat/Webwolf. Yes, you can totally use a VM but where's the fun in that? Plus, you have to give up some of the RAM on your host machine. I presented this lab to the Cover6 Community Meetup - First Time Speaker session on 10/28/26. [Check out the slide deck HERE](./Raspberry_Pi/Raspberry_Pi_Cyber_Lab_15_Minute_Talk.md).
