@@ -1,6 +1,6 @@
 # Cover6 First Watch — 7-Day Cyber Kill Chain Investigation
 
-First Watch is a seven-day cybersecurity investigation series developed by [Cover6 Solutions](https://www.cover6solutions.com/). The exercise follows the Lockheed Martin Cyber Kill Chain, providing an opportunity to investigate activity across the different phases of a simulated intrusion.
+First Watch is a FREE seven-day cybersecurity investigation series developed by [Cover6 Solutions](https://www.cover6solutions.com/). The exercise follows the Lockheed Martin Cyber Kill Chain, providing an opportunity to investigate activity across the different phases of a simulated intrusion.
 
 Throughout the series, I analyze network traffic and security logs using tools such as Wireshark and Splunk to identify suspicious activity, correlate evidence, and develop an understanding of how an intrusion progresses.
 
