@@ -180,13 +180,15 @@ sha256sum models/original_model.pkl models/original_model.safetensors
 
 The hashes matched the supplied baseline. This provided an integrity check for the original model files. It did not establish the integrity of the candidate replacement.
 
-#### Inspecting the model architecture
+#### Inspecting the candidate model architecture
 
 I ran the provided architecture inspection tool:
 
 ```bash
 python3 /opt/supply-chain/tools/inspect_h5_model.py models/candidate_model.h5
 ```
+
+<img src="./images/pl6.png" />
 
 The output identified five layers, including:
 
@@ -203,13 +205,11 @@ I then scanned the model with ModelScan:
 modelscan -p models/candidate_model.h5
 ```
 
-ModelScan reported one medium-severity issue involving the use of an unsafe Lambda operator from the Keras module.
+<img src="./images/pl7.png" />
 
-This corroborated the architecture inspection warning.
+ModelScan reported one medium-severity issue involving the use of an unsafe Lambda operator from the Keras module. This corroborated the architecture inspection warning.
 
-I have limited experience analyzing Keras Lambda layers, so I relied on the supplied inspection tools and their findings rather than claiming to have independently established what the function does.
-
-A Lambda layer is not automatically malicious. However, a layer capable of executing arbitrary code requires investigation before the model is trusted.
+I have limited experience analyzing Keras Lambda layers, so I relied on the supplied inspection tools and their findings. A Lambda layer is not automatically malicious. However, a layer capable of executing arbitrary code requires investigation before the model is trusted.
 
 **Recommendation:** Do not deploy `candidate_model.h5` until the `manipulate_output` function and its behavior have been independently reviewed and approved.
 
@@ -219,51 +219,33 @@ The investigation identified several security concerns.
 
 ### Production model compromise
 
-Static analysis of `production_model.pkl` revealed an `os.system` call executing a `curl` command to an external beacon endpoint.
-
-The destination correlated with the suspicious outbound HTTPS traffic recorded in the network logs.
-
-This provided strong evidence that the production model contained malicious functionality.
+- Static analysis of `production_model.pkl` revealed an `os.system` call executing a `curl` command to an external beacon endpoint.
+- The `attacker.com` destination correlated with the suspicious outbound HTTPS traffic recorded in the network logs.
+- This provided strong evidence that the production model contained malicious functionality.
 
 ### Dependency supply-chain concerns
 
-The dependency manifest contained a misspelled package name:
-
-```text
-reqeusts==2.31.0
-```
-
-This raised a potential typosquatting concern requiring verification.
-
-Additionally, `pip-audit` identified known vulnerabilities in the dependency environment. These findings require remediation and further dependency review.
+- The dependency manifest contained a misspelled package name: `reqeusts==2.31.0` raising a potential typosquatting concern requiring verification.
+- Additionally, `pip-audit` identified known vulnerabilities in the dependency environment. These findings require remediation and further dependency review.
 
 **Dependency Investigation Limitations**
 
-The dependency audit reported 37 vulnerabilities across identified packages, including PyTorch, Transformers, and Pillow.
+- The dependency audit reported 37 vulnerabilities across identified packages, including PyTorch, Transformers, and Pillow.
+- The installed package inventory showed Pillow 12.1.1, whereas the audit identified a vulnerability associated with Pillow 9.2.0. The reason for this discrepancy could not be established within the available environment.
+- The requirements file also contained the misspelled package name `reqeusts` instead of `requests`. A lookup against the PyPI JSON endpoint returned HTTP 404. However, the TryHackMe environment had no internet access, preventing further verification through the package registry or examination of the package's source.
 
-The installed package inventory showed Pillow 12.1.1, whereas the audit identified a vulnerability associated with Pillow 9.2.0. The reason for this discrepancy could not be established within the available environment.
-
-The requirements file also contained the misspelled package name `reqeusts` instead of `requests`. A lookup against the PyPI JSON endpoint returned HTTP 404. However, the TryHackMe environment had no internet access, preventing further verification through the package registry or examination of the package's source.
-
-These observations raised dependency integrity concerns, but did not establish that a malicious dependency was installed or that the typo represented a typosquatting attempt.
-
-Further investigation would require access to the original deployment environment, its dependency manifests and lockfiles, installed package inventory, and package registry information.
+These observations raised dependency integrity concerns, but did not establish that a malicious dependency was installed or that the typo represented a typosquatting attempt. Further investigation would require access to the original deployment environment, its dependency manifests and lockfiles, installed package inventory, and package registry information.
 
 ### Model repository concerns
 
-The deployment logs showed that the production model update came from a different organization than the original model source.
-
-The new organization triggered a warning, but the model was deployed anyway.
-
-The change in source organization should have prompted additional verification before deployment.
-
-The available evidence establishes a change in model provenance, but does not independently establish that the organization was fraudulent.
+- The deployment logs showed that the production model `code-review-bert-v2` update came from a different organization (`trustworthy-ai-lab`) than the original model source.
+- The new organization triggered a warning in the logs, but the model was deployed anyway. The change in source organization should have prompted additional verification before deployment.
+- The available evidence establishes a change in model provenance, but does not independently establish that the organization was fraudulent.
 
 ### Candidate model architecture concerns
 
-The replacement model contained a Lambda layer flagged by both architecture inspection and ModelScan.
-
-The function requires further examination before the model can be approved for production use.
+- The replacement model contained a Lambda layer flagged by both architecture inspection and ModelScan.
+- The function requires further examination before the model can be approved for production use.
 
 ## 4\. Recommendations
 
@@ -271,18 +253,22 @@ Based on the findings, I would recommend the following actions:
 
 1.  **Remove the compromised model from production.** Preserve a forensic copy and associated evidence before replacement or remediation.
 2.  **Investigate the external communication.** Review network and endpoint telemetry to determine whether any additional activity occurred beyond the observed beacon attempts.
-3.  **Review model provenance.** Verify the source organization, repository history, model version, and integrity of model artifacts before future deployment.
+3.  **Review model provenance.** Verify the source organization, repository history, model version, and integrity of model artifacts before future deployment. Attackers use naming techniques to appear trustworthy. A quick check in the repo will likely reveal a suspicious organization has no verification badge, no history and very few downloads.
 4.  **Investigate the suspicious dependency.** Determine whether `reqeusts` is a published package and whether it was installed or executed.
 5.  **Remediate vulnerable dependencies.** Review the `pip-audit` findings, verify the affected package versions, and update them to supported versions.
 6.  **Hold the candidate model from deployment.** Investigate the `manipulate_output` Lambda layer and validate its behavior before approval.
 7.  **Improve model deployment controls.** Require model provenance verification, artifact integrity checks, dependency review, and security scanning before production deployment.
+8.  **Use safer model serialization formats.** Whenever possible, prefer model formats designed to avoid arbitrary code execution during loading, such as Safetensors, over pickle-based formats. Pickle deserialization can execute arbitrary code, making untrusted model files a potential code execution vector. Safetensors avoids this particular risk by using a data-only serialization format. While Safetensors significantly reduces the risks associated with pickle deserialization, it does not guarantee that a model is free from malicious behavior or other security vulnerabilities. Continue to verify model provenance, integrity, and behavior before deploying it.
+9.  **Improve detection and alerting.** Review the warning mechanism triggered when a model is loaded from an unrecognized or untrusted source. If technically feasible, strengthen the control so that suspicious models are blocked or quarantined pending verification rather than merely generating a warning. At a minimum, ensure these warnings generate actionable alerts and are forwarded to the appropriate monitoring or security team. During the investigation, the warning appeared in the logs, but there was no apparent notification or escalation mechanism to ensure it received attention.
+
+ 
 
 ## 5\. Limitations and Further Investigation
 
 This exercise provided several useful indicators, but there were areas I did not independently validate.
 
 - I identified the suspicious pickle operations and relied on the provided safe analysis script to confirm the unsafe behavior. I did not execute the model.
-- I identified a potentially typosquatted dependency but did not verify whether the package existed in a public registry or had been installed.
+- I identified a potentially typosquatted dependency but could not verify whether the package had been installed.
 - I relied on the supplied tools to identify the candidate model's unsafe Lambda layer. I did not independently inspect or execute the `manipulate_output` function.
 - The supplied expected hashes covered the original model artifacts, not the candidate replacement.
 - The available network and beacon logs provided evidence of suspicious outbound communication, but did not establish the full extent of any data exposure or compromise.
@@ -302,5 +288,3 @@ A few lessons stood out:
 - **Security tools support analysis, but their findings still require interpretation.** A warning is a reason to investigate, not automatic proof of maliciousness.
 
 The most important lesson for me was that securing AI systems involves more than protecting the model's inputs and outputs. The model artifact, its source, dependencies, serialization format, architecture, and deployment process are all part of the attack surface.
-
-This was a useful first step in developing practical AI security investigation skills.
