@@ -25,6 +25,12 @@ Investigations involving security alerts, logs, network traffic, threat intellig
 -->
 [Explore SOC & Incident Response →](./SOC-IR/)
 
+## 🤖 AI Security
+
+Notes and hands-on labs focusing on AI security including Threat Modelling, Prompt Security, Supply Chain Attacks, and Data Poisoning.
+
+[Explore AI Security Labs →](./AI_Security/)
+
 ## 🚩 Capture The Flag (CTF)
 
 From time to time I might be able to join CTF events. This section contains walkthroughs and notes to guide the reader while attempting to not reveal the actual flags.
