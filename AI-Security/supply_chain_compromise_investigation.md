@@ -115,21 +115,21 @@ The combination of the static analysis findings and the correlated network activ
 
 ### 2.3 Examining suspicious dependencies
 
-Next, I reviewed the project's `requirements.txt` file.
-
-One entry immediately stood out:
+Next, I reviewed the project's `requirements.txt` file. 
 
 ```text
+analyst@tryhackme-2204:/opt/supply-chain/incident$ cat project/requirements.txt 
+torch==2.1.0
+transformers==4.35.0
+numpy==1.24.3
 reqeusts==2.31.0
+safetensors==0.4.0
+accelerate==0.24.0
 ```
 
-The package name appeared to be a misspelling of the widely used Python `requests` library.
+`reqeusts==2.31.0` immediately stood out. The package name appeared to be a misspelling of the widely used Python `requests` library. This raised the possibility of a typosquatting attack.
 
-This raised the possibility of a typosquatting attack.
-
-Typosquatting involves publishing a package with a name similar to a legitimate package, hoping that developers will install the wrong dependency due to a spelling mistake.
-
-If the misspelled package is malicious and gets installed, it could introduce malicious code into the development or production environment.
+Typosquatting involves publishing a package with a name similar to a legitimate package, hoping that developers will install the wrong dependency due to a spelling mistake. If the misspelled package is malicious and gets installed, it could introduce malicious code into the development or production environment.
 
 I identified this as a suspicious dependency that required further verification. I did not establish whether the misspelled package was actually published or installed in this environment.
 
