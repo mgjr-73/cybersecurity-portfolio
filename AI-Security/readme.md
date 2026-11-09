@@ -8,4 +8,6 @@ I'm also developing an independent AI security lab to investigate concepts, test
 
 This is an evolving collection of lab notes, investigations, research, and practical exercises.
 
-- [TryHackMe Challenge: Payload](./supply_chain_compromise_investigation.md) | [Read the companion blog post](https://secplusreview.wordpress.com/?p=1801)
+| Lab | Companion Blog |
+|---|---|
+| [TryHackMe Challenge: Payload](./supply_chain_compromise_investigation.md) | [Investigating An AI Supply Chain Compromise](https://secplusreview.wordpress.com/?p=1801) |
