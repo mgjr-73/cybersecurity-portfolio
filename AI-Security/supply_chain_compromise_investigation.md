@@ -141,38 +141,34 @@ I also ran `pip-audit` against the dependency requirements:
 pip-audit -r project/requirements.txt 2>&1
 ```
 
+<img src="./images/pl4.png" />
+
 The tool reported 37 known vulnerability findings in its output, including affected versions of packages such as:
 
 - PyTorch 2.1.0
 - Transformers 4.35.0
 - Pillow 9.2.0
 
-The output included Pillow even though it was not listed in the displayed requirements file. Its dependency source would need to be verified.
+The output included Pillow even though it was not listed in the requirements file. Its dependency source would need to be verified.
 
-The results identified outdated or vulnerable software that required remediation.
-
-It is important to distinguish this from the malicious model finding. Known vulnerabilities do not, by themselves, establish that a dependency was exploited during this incident.
+The results identified outdated or vulnerable software that required remediation. It is important to distinguish this from the malicious model finding. Known vulnerabilities do not, by themselves, establish that a dependency was exploited during this incident.
 
 ### 2.4 Evaluating the candidate replacement model
 
 The final part of the exercise was to assess the candidate replacement before the engineering team deployed it.
 
-The candidate was:
-
-```text
-models/candidate_model.h5
-```
+The candidate was: `models/candidate_model.h5`.
 
 I first reviewed the supplied checksum file:
 
-```bash
-cat checksums/expected_hashes.json
+```text
+analyst@tryhackme-2204:/opt/supply-chain/incident$ cat checksums/expected_hashes.json 
+{
+  "original_model.pkl": "793bb2f5bfdf4a1ceb448647885ade7909480a05dc12479c508e7c7f28d29077",
+  "original_model.safetensors": "46329f0c011e4d59d588fef1370c0e81ebba132841b7d8d4e2c476d19a150635"
 ```
 
-It contained expected hashes for:
-
-- `original_model.pkl`
-- `original_model.safetensors`
+It contained expected hashes for: `original_model.pkl` and `original_model.safetensors`
 
 I verified the corresponding files using:
 
@@ -180,9 +176,9 @@ I verified the corresponding files using:
 sha256sum models/original_model.pkl models/original_model.safetensors
 ```
 
-The hashes matched the supplied baseline.
+<img src="./images/pl5.png" />
 
-This provided an integrity check for the original model files. It did not establish the integrity of the candidate replacement.
+The hashes matched the supplied baseline. This provided an integrity check for the original model files. It did not establish the integrity of the candidate replacement.
 
 #### Inspecting the model architecture
 
