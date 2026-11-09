@@ -29,7 +29,7 @@ Investigations involving security alerts, logs, network traffic, threat intellig
 
 Notes and hands-on labs focusing on AI security including Threat Modelling, Prompt Security, Supply Chain Attacks, and Data Poisoning.
 
-[Explore AI Security Labs →](./AI_Security/)
+[Explore AI Security Labs →](./AI-Security/)
 
 ## 🚩 Capture The Flag (CTF)
 
