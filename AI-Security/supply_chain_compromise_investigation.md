@@ -21,15 +21,15 @@ I started by examining the deployment and network logs to understand when the mo
 
 The deployment logs showed the following:
 
-| Date and time | Event |
-| --- | --- |
-| Jan 5, 2024 09:15 | Original `code-review-bert` v1.0.0 model pulled from Hugging Face and deployed |
-| Jan 26, 2024 14:32 | Model update requested by an ML engineer |
-| Jan 26, 2024 14:32 | New source organization, `trustworthy-ai-lab`, detected |
-| Jan 26, 2024 14:32 | `production_model.pkl` loaded and deployed |
-| Feb 16, 2024 03:01 | Outbound HTTPS communication to `attacker.com` begins |
-| Feb 16, 2024 03:13 | Outbound connection blocked and beacon activity captured |
-| Feb 16, 2024 03:14 | SOC alert generated and incident created |
+| Date and time | Event | Source Log |
+| --- | --- | --- |
+| Jan 5, 2024 09:15 | Original `code-review-bert` v1.0.0 model pulled from Hugging Face and deployed | deployment |
+| Jan 26, 2024 14:32 | Model update requested by an ML engineer | deployment |
+| Jan 26, 2024 14:32 | New source organization, `trustworthy-ai-lab`, detected | deployment |
+| Jan 26, 2024 14:32 | `production_model.pkl` loaded and deployed | deployment |
+| Feb 16, 2024 03:01 | Outbound HTTPS communication to `attacker.com` begins | network |
+| Feb 16, 2024 03:13 | Outbound connection blocked and beacon activity captured | beacon_capture |
+| Feb 16, 2024 03:14 | SOC alert generated and incident created | beacon_capture, deployment |
 
 The original model came from `verified-ml-team`, while the replacement came from a different organization, `trustworthy-ai-lab`.
 
