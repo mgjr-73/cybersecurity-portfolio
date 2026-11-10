@@ -147,14 +147,14 @@ Python · Bash
 ---
 -->
 ## Tools and Frameworks Exposure
-| SIEM | IR | Forensics  | Frameworks | Lang/Script | Platforms |
-|---|---|---|---|---|---|
-| Splunk | VirustTotal  | CyberChef | MITRE ATT&CK | Python | Windows |
-| Wazuh | AbuseIPdb | WireShark | Cyber Kill Chain | Bash | Linux |
-||Talos Threat Intel |  | NIST Incident Response | KQL | VMWare |
-|||| SANS Incident Response | SPL | VirtualBox |
-|||||| Docker |
-|||||| Raspberry Pi |
+| SIEM | IR | Forensics  | Frameworks | Lang/Script | Platforms | AI Security
+|---|---|---|---|---|---|---|
+| Splunk | VirustTotal  | CyberChef | MITRE ATT&CK | Python | Windows | AI Supply Chain |
+| Wazuh | AbuseIPdb | WireShark | Cyber Kill Chain | Bash | Linux ||
+||Talos Threat Intel |  | NIST Incident Response | KQL | VMWare ||
+|||| SANS Incident Response | SPL | VirtualBox ||
+|||||| Docker ||
+|||||| Raspberry Pi ||
 
 ## About Me
 
