@@ -135,3 +135,72 @@
     - Remove sensitive internal information from HTML comments and source code.  
     - Implement detection and response rules to identify and restrict automated web enumeration based on suspicious request patterns.
 </details>
+
+## Day 3: Initial Access (Completed 11/12/26)
+<details>
+  <summary><strong>Pcap Investigation</strong></summary>
+  
+  - TCP handshake and SSH handshake observed between client `67.205.138.164` and server `104.248.231.191`.
+  - Could not establish whether authentication was successful.
+    
+</details>
+
+<details>
+  <summary><strong>Splunk Investigation</strong></summary>
+  
+  Query output showed indication of automated web probes from two IPs:
+  - On 8/23/26 37 login attempts were observed originating from `67.205.138.164` starting at `2:15:00` and ending at `2:19:50`.
+  - Out of the 37 login attempts, 33 belonged to user `jchen`. 28 failed, 5 succeeded.
+  - The 33 attempts from user `jchen` occurred within 4 seconds suggesting automated password guessing.
+Further investigation is required to determine if user `jchen` conducted further actions after successfully logging in.
+  
+</details>
+
+### Module Questions and Answers
+<details>
+  <summary>Q1. At what exact time did the attacker first log in, and to which account?</summary>
+  
+  - 2:17:40, jchen
+    <img width="931" height="273" alt="image" src="https://github.com/user-attachments/assets/b85d7465-e462-498a-a9d8-1de8e7bce6dd" />
+
+</details>
+
+<details>
+  <summary>Q2. How many failed attempts preceded the success? What does the timing tell you about the method?</summary>
+  
+  - Just to be sure there were no successful ones in the middle of the 28 failed attempts, I adjusted the query since the question says "preceded" which suggests time. I confirmed that all 28 came before the successful logins using the following query:
+    
+    ```spl
+    index=odapeeka_incident sourcetype=linux_secure  (67.205.138.164 OR 104.248.231.191)
+    | rex "(?<result>Failed|Accepted) password for (invalid user )?(?<user>\S+) from (?<src_ip>[0-9.]+)"
+    | table _time user _raw
+    | sort _time
+    ```
+    All 28 failed attempts preceded the successful logins. The failed and successful login attempts combined occurred within 4 minutes suggesting automated password guessing.
+  
+</details>
+
+<details>
+  <summary>Q3. Four attempts used accounts that don’t exist. What does that suggest about the attacker’s wordlist?</summary>
+
+  - The usernames `admin`, `root`, `test`, and `oracle` suggest the attacker is using a generic wordlist containing common account names. However, the inclusion of `jchen` is interesting because it may indicate prior knowledge of a specific user on the target system. This could have come from reconnaissance or another source of information. It suggests the attacker may be combining generic username guessing with targeted account discovery.
+  
+</details>
+
+<details>
+  <summary>Q4. Why can’t the PCAP alone tell you the login succeeded?</summary>
+
+  - SSH network communications are encrypted.
+</details>
+
+<details>
+  <summary>Q5. Which control would most likely have stopped this: account lockout, key-only SSH, an alert on failures followed by success, or all three? Explain.</summary>
+
+  - Account lockout could have helped prevent the 28 consecutive attempts against `jchen`, depending on the configured lockout threshold and duration. However, an attacker could potentially avoid triggering the lockout by adjusting the timing and frequency of attempts.
+
+    Key-only SSH would eliminate password-based brute-force attempts as an authentication method, provided password authentication is disabled and the private key is not compromised.
+
+    Finally, an alert for repeated authentication failures followed by a successful login would provide detection, allowing the SOC team to identify and investigate potentially compromised accounts. However, alerting alone would not prevent the successful login.
+
+    Combining all three controls provides stronger protection by reducing the opportunity for password-based attacks, limiting repeated attempts, and improving the likelihood of detecting a successful compromise.
+</details>
