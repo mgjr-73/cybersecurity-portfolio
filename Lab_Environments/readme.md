@@ -4,7 +4,7 @@
    </kbd>
 </p>
 
-These labs are built prompted by inspiration coming from watching a video, reading an article, learnings platforms, or even asking AI one Saturday morning, "What no-cost to low-cost cybersecurity lab can I build over a weekend?".
+These labs were built prompted by inspiration coming from watching a video, reading an article, learnings platforms, or even asking AI one Saturday morning, "What no-cost to low-cost cybersecurity lab can I build over a weekend?".
 
 Hopefully you can use the information here to jumpstart your own cybersecurity lab builds.
 
