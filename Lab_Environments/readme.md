@@ -4,9 +4,7 @@
    </kbd>
 </p>
 
-These purpose-built labs are ones I built outside of any learning platforms like TryHackMe, MYDFIR, LetsDefend, etc...
-
-The inspiration may have come from watching a video or reading an article, or even asking AI one Saturday morning, "What no-cost to low-cost cybersecurity lab can I build over a weekend?".
+These labs are built prompted by inspiration coming from watching a video, reading an article, learnings platforms, or even asking AI one Saturday morning, "What no-cost to low-cost cybersecurity lab can I build over a weekend?".
 
 Hopefully you can use the information here to jumpstart your own cybersecurity lab builds.
 
