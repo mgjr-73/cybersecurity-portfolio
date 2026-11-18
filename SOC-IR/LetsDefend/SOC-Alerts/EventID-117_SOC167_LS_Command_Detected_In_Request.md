@@ -40,23 +40,15 @@ Device Action : Allowed
 - **12:36 AM:** Alert triggered by a GET request to `https://letsdefend.io/blog/?s=skills`.
 - **12:37 AM:** Subsequent GET request to the "SOC Analyst Career Without a Degree" article.
 
-The alert triggered because the requested URL contained the string `ls`, which the detection rule associated with a possible command injection attempt.
+The alert was triggered because the detection rule identified the character sequence `ls` in the requested URL. I began by reviewing the destination IP's reputation and ownership information using VirusTotal, AbuseIPDB, and Cisco Talos. The available information associated the IP with Cloudflare and did not indicate malicious activity.
 
-I reviewed the destination IP's reputation and ownership information using VirusTotal, AbuseIPDB, and Cisco Talos. The available information associated the IP with Cloudflare. The reputation results did not provide evidence that the destination was malicious.
+I then reviewed the HTTP proxy logs associated with the source IP to determine whether the triggering request was part of a broader suspicious pattern. The seven requests were directed to the same destination and involved browsing pages on the LetsDefend blog.
 
-I then examined the HTTP proxy logs associated with the source IP. Seven entries were reviewed, and the traffic was directed to the same destination IP. The requests were for pages on the legitimate LetsDefend blog, including the request that triggered the alert.
-
-The triggering request was a GET request to:
-
-`https://letsdefend.io/blog/?s=skills`
-
-The string `ls` was part of the search query value `skills`, rather than a standalone command or apparent command-injection payload. The request returned HTTP 200, and the surrounding requests were consistent with normal browsing activity.
-
-No evidence of additional suspicious traffic from the source IP was identified in the reviewed HTTP logs.
+The triggering request used the search query `s=skills`. This explains why the rule matched: `ls` appeared within the word `skills`, rather than as a standalone command or apparent command-injection payload. The surrounding requests were consistent with normal browsing activity, and I found no evidence of other suspicious requests in the reviewed logs.
 
 ## Analyst Assessment
 
-**Rule execution**: Correct. 
+**Rule execution**: Correct. The rule triggered according to its configured matching criteria.
 **Underlying activity**: Benign.
 **Verdict**: False Positive.
 
@@ -66,5 +58,5 @@ The investigation supports a false-positive classification for this event. This 
 
 ## Recommendations
 
-1. **Tune the detection rule:** Update the matching criteria to identify `ls` as a standalone command or possible variations with optional flags to indicate use of command injection, rather than matching the character sequence anywhere in a URL.
+1. **Tune the detection rule:** Update the matching criteria to identify `ls` in a command-execution context rather than matching the character sequence anywhere in a URL. Account for relevant command arguments, flags, and common encoding variations.
 2. **Validate the revised rule:** Test against both legitimate URLs containing the substring `ls` and representative command-injection patterns to reduce false positives without overlooking relevant activity.
