@@ -1,10 +1,12 @@
-# Overview
+# SOC388 - Lumma Stealer - DLL Side-Loading via Click Fix Phishing
+
+## Overview
 Investigation of a LetsDefend SOC alert involving a suspected ClickFix phishing email associated with Lumma Stealer. The investigation correlated email security data, threat intelligence, browser history, HTTP activity, and endpoint telemetry to determine whether the alert represented a true positive and what activity occurred on the affected host.
 
-# Objective
+## Objective
 Determine whether the alert is a True Positive or False Positive and take the appropriate action according to the playbook.
 
-# Alert Details
+## Alert Details
 - EventID : 316
 - Event Time : Mar, 13, 2025, 09:44 AM
 - Rule : SOC338 - Lumma Stealer - DLL Side-Loading via Click Fix Phishing
@@ -18,12 +20,12 @@ Determine whether the alert is a True Positive or False Positive and take the ap
 - Hint: Try to analyse website, if the domain is down, try to analyze it via any.run. Check the
 processes for powershell execution. Check Log management for additional logs.
 
-# Investigation / Approach
+## Investigation / Approach
 I wasn't familiar with Lumma Stealer so I did an internet search to quickly familiarize myself. I found useful information at [Malware-Traffic-Analysis.net](https://www.malware-traffic-analysis.net/2026/01/01/index.html) regarding the timeline between initial infection and subsequent activity consisting of HTTPS requests caused by commands for `mshta`.
 
 Following the playbook...
 
-## Parse the email
+### Parse the email
 Under Email Security, searched for recipient `dylan@letsdefend.io`.
 <img width="1605" height="187" alt="image" src="https://github.com/user-attachments/assets/4896a780-96fc-46af-9a8c-3aca5b7a3da1" />
 
@@ -34,7 +36,7 @@ Items confirmed against initial information from Alert Details:
 
 There were no attachments. Hovering over the `UPGRADE NOW` button revealed `hxxps[:]//www.windows-update.site`. Windows products usually start with `microsoft.com` domain. This was suspicious.
 
-## Threat Intelligence
+### Threat Intelligence
 Searched VirusTotal for `www[.]windows-update.site`
 <img width="786" height="200" alt="image" src="https://github.com/user-attachments/assets/5c5d62fa-9c15-4717-bb31-c00c4dc0e5b2" />
 
@@ -53,7 +55,7 @@ Checked both `www[.]windows-update.site` and SMTP IP in Talos Threat Intelligenc
 
 Based on threat intelligence, I found malicious/reported activity associated with the sender infrastructure. Since the Device Action status (ALLOWED) indicated that the email was delivered, the playbook's next recommended step was to delete the email.
 
-## Determine Whether the User Interacted
+### Determine Whether the User Interacted
 In Endpoint Log Management, I filtered for the event date and found two logs showing the malicious SMTP IP address, one for the incoming email (SMTP port 25) and one showing subsequent HTTPS traffic (port 443) associated with access to the malicious site. I also noted the timestamp... email received at 9:44AM and the outgoing internet connection at 11:26PM, almost 14 hours after the email was received. This tracked with the behavior described in the Malware-Traffic-Analysis.net finding, where the outbound internet connection starts several hours after initial infection.
 
 After confirmation, the endpoint was contained per playbook guidelines. 
@@ -67,7 +69,7 @@ Date: Mar 13, 2025
 <img width="1018" height="276" alt="image" src="https://github.com/user-attachments/assets/6d29467b-181b-4fd8-92b3-a78290a26855" />
 
 
-## Artifacts
+### Artifacts
 | Value | Comment | Type |
 | --- | --- | --- |
 | 132.232.40.201 | Malicious IP | IP  |
@@ -76,7 +78,7 @@ Date: Mar 13, 2025
 | update@windows-update.site | Email sender | Email Sender |
 | windows-update.site | Email domain | Email domain |
 
-## Analyst Note
+### Analyst Note
 An alert was triggered on Mar, 13, 2025, 09:44 AM, for inbound email from sender update@windows-update.site with SMTP IP 132.232.40.201 to dylan@letsdefend.io at 172.16.17.216. The alert was generated because the email contained a link to `windows-update.site` which is associated with ClickFix phishing campaign. Analysis of HTTP and Endpoint Browser History logs  indicates the link was clicked thereby accessing the malicious site.
 
 Verdict: True Positive
@@ -84,12 +86,12 @@ Verdict: True Positive
 Actions Taken: The endpoint was contained, and the case was escalated to Tier 2 for further investigation.
 
 
-# Analyst Perspective
+## Analyst Perspective
 The investigation demonstrated that no individual telemetry source provided the complete picture. Email telemetry established the initial phishing event, threat intelligence provided context about the infrastructure, browser history established user interaction, and endpoint telemetry revealed subsequent PowerShell activity.
 
 The approximately 14-hour gap between the phishing email and endpoint execution also demonstrated the importance of timeline analysis. While the delay was significant, the available evidence was insufficient to determine exactly why it occurred. However, the findings on Malware-Traffic-Analysis.net provided additional context that was consistent with the observed Lumma Stealer behavior.
 
-## Important Questions
+### Important Questions
 - Is the email actually malicious?
 - What does threat intelligence tell me about the sender infrastructure?
 - Did the user click the link?
@@ -98,7 +100,7 @@ The approximately 14-hour gap between the phishing email and endpoint execution 
 - What does the PowerShell command actually do? (This is for Tier 2 scope but can be a good follow up post)
 - Does the evidence support the Lumma Stealer hypothesis?
 
-## Skills Obtained
+### Skills Obtained
 - Security alert triage
 - Phishing investigation
 - Threat intelligence analysis
@@ -110,7 +112,7 @@ The approximately 14-hour gap between the phishing email and endpoint execution 
 - Incident containment and escalation
 - Evidence-based incident reporting
 
-## Tools Used
+### Tools Used
 - VirusTotal
 - AbuseIPDB
 - Cisco Talos
@@ -119,7 +121,7 @@ The approximately 14-hour gap between the phishing email and endpoint execution 
 - HTTP Logs
 - Endpoint Telemetry
 
-## Key Takeaways
+### Key Takeaways
 - Correlating multiple telemetry sources can turn an isolated alert into a supported incident narrative.
 - Timeline analysis can reveal important questions that individual events don't.
 - Threat intelligence helps form a hypothesis, but conclusions should remain grounded in observed evidence.
