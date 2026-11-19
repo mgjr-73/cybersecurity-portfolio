@@ -69,7 +69,9 @@ The available evidence indicates that the alert was caused by an overly broad ma
 ## Analyst Assessment
 
 **Rule execution**: Correct. The rule triggered according to its configured matching criteria.
+
 **Underlying activity**: Benign.
+
 **Verdict**: False Positive.
 
 The detection rule matched the characters `ls` within the word `skills` in the URL query parameter, not as a standalone command or apparent command-injection payload. Review of the available HTTP logs did not identify evidence of command injection or other malicious activity associated with this alert.
