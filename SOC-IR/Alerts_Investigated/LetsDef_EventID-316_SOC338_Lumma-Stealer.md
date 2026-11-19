@@ -1,138 +1,119 @@
-# SOC388 - Lumma Stealer - DLL Side-Loading via Click Fix Phishing
+# SOC338 - Lumma Stealer - DLL Side-Loading via ClickFix Phishing
 
 ## Overview
-Investigation of a LetsDefend SOC alert involving a suspected ClickFix phishing email associated with Lumma Stealer. The investigation correlated email security data, threat intelligence, browser history, HTTP activity, and endpoint telemetry to determine whether the alert represented a true positive and what activity occurred on the affected host.
-
-## Objective
-Determine whether the alert is a True Positive or False Positive and take the appropriate action according to the playbook.
+Investigation of a LetsDefend SOC alert titled "Lumma Stealer - DLL Side-Loading via Click Fix Phishing." Following the SOC playbook, I investigated the suspected phishing activity by correlating email security data, threat intelligence, browser history, HTTP activity, and endpoint telemetry to assess the alert and determine what activity occurred on the affected host.
 
 ## Alert Details
-- EventID : 316
-- Event Time : Mar, 13, 2025, 09:44 AM
-- Rule : SOC338 - Lumma Stealer - DLL Side-Loading via Click Fix Phishing
-- Level : Security Analyst
-- SMTP Address : 132.232.40.201
-- Source Address : update@windows-update.site
-- Destination Address : dylan@letsdefend.io
-- E-mail Subject : Upgrade your system to Windows 11 Pro for FREE
-- Device Action : Allowed
-- Trigger Reason : Redirected site contains a click fix type script for Lumma Stealer distribution.
-- Hint: Try to analyse website, if the domain is down, try to analyze it via any.run. Check the
-processes for powershell execution. Check Log management for additional logs.
+```plaintext
+Event ID: 316
+Alert: SOC338 - Lumma Stealer - DLL Side-Loading via ClickFix Phishing
+Event Time: March 13, 2025, 09:44 AM (timezone not specified)
+SMTP IP: 132.232.40.201
+Sender:update@windows-update.site
+Recipient:dylan@letsdefend.io
+Subject: Upgrade your system to Windows 11 Pro for FREE
+Affected Host IP: 172.16.17.216
+Device Action: Allowed
+```
 
-## Investigation / Approach
-I wasn't familiar with Lumma Stealer so I did an internet search to quickly familiarize myself. I found useful information at [Malware-Traffic-Analysis.net](https://www.malware-traffic-analysis.net/2026/01/01/index.html) regarding the timeline between initial infection and subsequent activity consisting of HTTPS requests caused by commands for `mshta`.
+## Findings
 
-Following the playbook...
+- **Email:** The phishing email was delivered to `dylan@letsdefend.io` from `update@windows-update.site`. It contained an `UPGRADE NOW` button linking to `hxxps[:]//www.windows-update.site`. No attachments were present.
+- **Threat Intelligence:** VirusTotal and Cisco Talos provided suspicious or malicious reputation information for the domain. The SMTP IP reputation was less conclusive, with differing results across the intelligence sources. Talos listed the domain on its Block List at the time of investigation.
+- **HTTP activity:** Endpoint logs showed inbound SMTP activity at 09:44 AM and subsequent outbound HTTPS activity at 11:26 PM on March 13, 2025, approximately 13 hours and 42 minutes later.
+- **Browser history:** Endpoint browser history provided evidence that the user accessed the suspicious website.
+- **PowerShell activity:** Terminal History contained an obfuscated PowerShell launcher invoking `mshta.exe`. Successful execution and subsequent payload activity were not established by the available evidence.
 
-### Parse the email
-Under Email Security, searched for recipient `dylan@letsdefend.io`.
-<img width="1605" height="187" alt="image" src="https://github.com/user-attachments/assets/4896a780-96fc-46af-9a8c-3aca5b7a3da1" />
+### Indicators and Artifacts
 
-Items confirmed against initial information from Alert Details:
-- Timestamp, `Mar, 13, 2025, 09:44 AM`
-- Sender: `update@windows-update.site`
-- Subject: `Upgrade your system to Windows 11 Pro for FREE`
+| Indicator | Value | Context |
+|---|---|---|
+| SMTP IP | `132.232.40.201` | IP associated with the phishing email |
+| Affected Host IP | `172.16.17.216` | IP belonging to the affected host `Dylan` |
+| Domain | `windows-update.site` | Domain linked in the phishing email |
+| URL | `hxxps[:]//www.windows-update.site` | Destination of the email's upgrade button |
+| Sender | `update@windows-update.site` | Email sender |
+| Recipient | `dylan@letsdefend.io` | Intended recipient |
 
-There were no attachments. Hovering over the `UPGRADE NOW` button revealed `hxxps[:]//www.windows-update.site`. Windows products usually start with `microsoft.com` domain. This was suspicious.
+## Investigation Summary
+Following the SOC playbook, I began by examining the email and its contents, then reviewed threat-intelligence sources and endpoint telemetry to determine whether the recipient interacted with the suspicious link and what activity followed.
 
-### Threat Intelligence
-Searched VirusTotal for `www[.]windows-update.site`
-<img width="786" height="200" alt="image" src="https://github.com/user-attachments/assets/5c5d62fa-9c15-4717-bb31-c00c4dc0e5b2" />
+### Timeline of Events
 
-SMTP IP address 132[.]232[.]40[.]201 was also suspicious but based on the score, I needed to investigate a bit further.
-<img width="1817" height="207" alt="image" src="https://github.com/user-attachments/assets/942ea32d-f30b-4086-8a5a-cdbbd197768d" />
-<img width="844" height="783" alt="image" src="https://github.com/user-attachments/assets/c99500b8-8a3f-4c3b-aa14-dd5d5cb78212" />
+*March 13, 2025 (timezone not specified)*
 
-Relations tab confirmed `windows-update.site`
-<img width="822" height="394" alt="image" src="https://github.com/user-attachments/assets/4568a286-cbcb-48b7-a2b1-2d77ca285dc3" />
+- **09:44 AM:** Phishing email received from `update@windows-update.site` with the subject "Upgrade your system to Windows 11 Pro for FREE."
+- **11:26 PM:** Endpoint logs recorded subsequent outbound HTTPS activity associated with the suspicious destination.
 
-Checked the SMTP IP on AbuseIPDB but based on confidence score, it is not conclusive if the IP is malicious.
-<img width="670" height="521" alt="image" src="https://github.com/user-attachments/assets/1cb7fc19-8fb2-4cc4-8ddf-a63731b7d160" />
+On March 13, 2025, at 11:26 PM, (timezone not specified),  an an inbound email alert involving a message sent to `dylan@letsdefend.io` from `update@windows-update.site` on host `Dylan` at `172.16.17.216`. The email contained a link presented as a free Windows 11 Pro upgrade. Review of the email showed no attachments, but hovering over the upgrade button revealed a link to `windows-update.site`, which warranted further investigation.
 
-Checked both `www[.]windows-update.site` and SMTP IP in Talos Threat Intelligence. SMTP IP address reputation was neutral but was not/no longer on the Block List. `www[.]windows-update.site`, however, was still on the Block List.
-<img width="1268" height="650" alt="image" src="https://github.com/user-attachments/assets/aebdc0b9-6e58-4a77-aead-1c36ea6ff392" />
+Threat-intelligence checks provided additional context about the sender infrastructure and destination domain. Although the SMTP IP reputation results were not conclusive across all sources, the domain was identified as suspicious and appeared on the Cisco Talos Block List.
 
-Based on threat intelligence, I found malicious/reported activity associated with the sender infrastructure. Since the Device Action status (ALLOWED) indicated that the email was delivered, the playbook's next recommended step was to delete the email.
+Domain Search:
+<kbd>
+    <img src="./images/ld-316-01.png" />
+</kbd>
+<kbd>
+    <img src="./images/ld-316-02.png" />
+</kbd>
+<kbd>
+    <img src="./images/ld-316-06.png" />
+</kbd>
 
-### Determine Whether the User Interacted
-In Endpoint Log Management, I filtered for the event date and found two logs showing the malicious SMTP IP address, one for the incoming email (SMTP port 25) and one showing subsequent HTTPS traffic (port 443) associated with access to the malicious site. I also noted the timestamp... email received at 9:44AM and the outgoing internet connection at 11:26PM, almost 14 hours after the email was received. This tracked with the behavior described in the Malware-Traffic-Analysis.net finding, where the outbound internet connection starts several hours after initial infection.
+SMTP IP Search:
+<kbd>
+    <img src="./images/ld-316-03.png" />
+</kbd>
+<kbd>
+    <img src="./images/ld-316-04.png" />
+</kbd>
+<kbd>
+    <img src="./images/ld-316-05.png" />
+</kbd>
 
-After confirmation, the endpoint was contained per playbook guidelines. 
+I then reviewed endpoint logs to determine whether the recipient interacted with the email. The HTTP and browser history evidence supported that the user accessed the suspicious website. 
 
-Investigating EDR logs, I further confirmed access to the malicious site via browser history.
-<img width="855" height="196" alt="image" src="https://github.com/user-attachments/assets/cec04055-6001-4728-b349-8cbe260622df" />
+<kbd>
+    <img src="./images/ld-316-07.png" />
+</kbd>
 
-In the Terminal History, I found obfuscated powershell launcher invoking `mshta.exe`. Once again, calling back to information I found in Malware-Traffic-Analysis.net.
+Further examination of Terminal History revealed an obfuscated PowerShell launcher invoking `mshta.exe`, indicating potentially suspicious endpoint activity requiring further investigation.
 
-Date: Mar 13, 2025
-<img width="1018" height="276" alt="image" src="https://github.com/user-attachments/assets/6d29467b-181b-4fd8-92b3-a78290a26855" />
+<kbd>
+    <img src="./images/ld-316-09.png" />
+</kbd>
 
+The approximately 14-hour interval between email receipt and subsequent outbound HTTPS activity was notable. 
 
-### Artifacts
-| Value | Comment | Type |
-| --- | --- | --- |
-| 132.232.40.201 | Malicious IP | IP  |
-| 172.16.17.216 | Victim IP belonging to host Dylan | IP  |
-| hxxps\[:\]//www\[.\]windows-update\[.\]site | Malicious site | URL |
-| update@windows-update.site | Email sender | Email Sender |
-| windows-update.site | Email domain | Email domain |
+<kbd>
+    <img src="./images/ld-316-08.png" />
+</kbd>
 
-### Analyst Note
-An alert was triggered on Mar, 13, 2025, 09:44 AM, for inbound email from sender update@windows-update.site with SMTP IP 132.232.40.201 to dylan@letsdefend.io at 172.16.17.216. The alert was generated because the email contained a link to `windows-update.site` which is associated with ClickFix phishing campaign. Analysis of HTTP and Endpoint Browser History logs  indicates the link was clicked thereby accessing the malicious site.
+The available telemetry establishes the timing of these events, but does not explain the delay or independently prove that the HTTPS activity resulted from successful execution of the PowerShell launcher.
 
-Verdict: True Positive
+The affected endpoint was contained and the case escalated to Tier 2 for further investigation.
 
-Actions Taken: The endpoint was contained, and the case was escalated to Tier 2 for further investigation.
+## Analyst Assessment
 
+**Rule execution:** Supported by the observed phishing email and subsequent suspicious activity on the affected endpoint.
 
-## Analyst Perspective
-The investigation demonstrated that no individual telemetry source provided the complete picture. Email telemetry established the initial phishing event, threat intelligence provided context about the infrastructure, browser history established user interaction, and endpoint telemetry revealed subsequent PowerShell activity.
+**Underlying activity:** Suspicious. The evidence supports email delivery, access to the linked website, and the presence of an obfuscated PowerShell launcher invoking `mshta.exe` in Terminal History.
 
-The approximately 14-hour gap between the phishing email and endpoint execution also demonstrated the importance of timeline analysis. While the delay was significant, the available evidence was insufficient to determine exactly why it occurred. However, the findings on Malware-Traffic-Analysis.net provided additional context that was consistent with the observed Lumma Stealer behavior.
+**Verdict:** True Positive.
 
-### Important Questions
-- Is the email actually malicious?
-- What does threat intelligence tell me about the sender infrastructure?
-- Did the user click the link?
-- What happened after the user visited the site?
-- Why was there a ~14-hour gap before endpoint execution?
-- What does the PowerShell command actually do? (This is for Tier 2 scope but can be a good follow up post)
-- Does the evidence support the Lumma Stealer hypothesis?
+The investigation supports classifying the alert as a True Positive for the phishing and suspicious link activity. However, the available evidence does not conclusively establish successful Lumma Stealer execution, DLL side-loading, payload installation, or data exfiltration.
 
-### Skills Obtained
-- Security alert triage
-- Phishing investigation
-- Threat intelligence analysis
-- Email security investigation
-- IOC analysis
-- Log correlation
-- Endpoint telemetry analysis
-- Timeline reconstruction
-- Incident containment and escalation
-- Evidence-based incident reporting
+Further endpoint investigation is required to determine the outcome of the PowerShell and `mshta.exe` activity and assess the full impact.
 
-### Tools Used
-- VirusTotal
-- AbuseIPDB
-- Cisco Talos
-- Email Security / Email Logs
-- Browser History
-- HTTP Logs
-- Endpoint Telemetry
+## Actions Taken
 
-### Key Takeaways
-- Correlating multiple telemetry sources can turn an isolated alert into a supported incident narrative.
-- Timeline analysis can reveal important questions that individual events don't.
-- Threat intelligence helps form a hypothesis, but conclusions should remain grounded in observed evidence.
+- The affected endpoint was contained according to the playbook.
+- The case was escalated to Tier 2 for further investigation.
 
+## Recommendations
 
-
-
-
-
-
-
-
-
-
+1. **Investigate PowerShell and `mshta.exe` activity:** Examine the recorded command, process execution telemetry, parent-child relationships, and any associated files or network activity to determine whether the launcher executed successfully and what it attempted to do.
+2. **Determine the extent of compromise:** Investigate for evidence of Lumma Stealer execution, DLL side-loading, persistence, credential theft, or other post-compromise activity.
+3. **Scope the environment:** Search other endpoints and relevant telemetry for the suspicious domain, URL, SMTP IP, and associated activity to identify potential additional exposure.
+4. **Review email exposure:** Confirm whether the phishing email remains in other mailboxes and remove or block it as appropriate.
+5. **Maintain containment:** Keep the affected endpoint contained until the investigation establishes whether it is safe to return to service.
