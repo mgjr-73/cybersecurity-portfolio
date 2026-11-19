@@ -17,8 +17,8 @@ response actions.
 - Detection analysis
 
 ## Projects
+- [Alerts Investigated](./Alerts_Investigated/)
 - [Cover6](./Cover6)
-- [LetsDefend](./LetsDefend/)
 - [MYDFIR](./MYDFIR)
 <!--
 
