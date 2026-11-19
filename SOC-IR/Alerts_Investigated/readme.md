@@ -11,4 +11,4 @@ When appropriate, I will also add a companion blog post for an alert where I exp
 | Platform | Alert | Companion Blog |
 |---|---|---|
 | LetsDefend | [EventID 117: SOC167 LS Command Detected](LetsDef_EventID-117_SOC167_LS_Command_Detected_In_Request.md) | - |
-| LetsDefend | [EventID 316: SOC338 Lumma Stealer](LetsDef_EventID-316_SOC338_Lumma-Stealer.md) | - |
+| LetsDefend | [EventID 316: SOC338 Lumma Stealer](LetsDef_EventID-316_SOC338_Lumma-Stealer.md) | [Go ➡️](https://secplusreview.wordpress.com/2026/11/20/investigation-notes-letsdefend-alert-soc338-lumma-stealer-dll-side-loading-via-click-fix-phishing/) |
